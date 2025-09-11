@@ -21,7 +21,7 @@ if (
             break;
         default:
             $role = null;
-    }
+    } 
 
     if ($role !== null) {
         try {
