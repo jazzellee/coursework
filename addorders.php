@@ -6,26 +6,29 @@ if (
 ) {
     array_map("htmlspecialchars", $_POST);
 
-print_r($_POST);
-$borrowdate = $_POST["borrowdate"]; // Assuming it's a valid date string
-
-// Create a DateTime object from the borrowdate
-$borrowdate_obj = new DateTime($borrowdate);
-
-// Add 14 days
-$borrowdate_obj->add(new DateInterval("P14D"));
-
-// Get the due date and format it to only show the date (Y-m-d)
-$duedate = $borrowdate_obj->format("Y-m-d");
-
-echo $duedate; // Display the due date
+    switch ($_POST["paid"]) {
+        case "Unpaid":
+            $paid = 0;
+            break;
+        case "Paid":
+            $paid = 1;
+            break;
+        default:
+            $paid = null;
+    }
 
     switch ($_POST["status"]) {
-        case "On Loan":
+        case "Preparing":
             $status = 0;
             break;
-        case "Returned":
+        case "Dispatched":
             $status = 1;
+            break;
+        case "Out for Delivery":
+            $status = 2;
+            break;
+        case "Delivered":
+            $status = 3;
             break;
         default:
             $status = null;
@@ -33,10 +36,8 @@ echo $duedate; // Display the due date
     
 
 
-    if ($status !== null) {
-
-       
-            $stmt = $conn->prepare("INSERT INTO tblloans(userid, bookid, isbn, borrowdate, duedate, status)
+    if ($paid !== null) {
+            $stmt = $conn->prepare("INSERT INTO tblorders(userid, bookid, isbn, borrowdate, duedate, status)
                 VALUES (:userid, :bookid, :isbn, :borrowdate, :duedate, :status)");
             
         //try {
