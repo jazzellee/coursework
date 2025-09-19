@@ -7,16 +7,19 @@
 </head>
 <body>
     <form action="addorders.php" method="POST">
-    First name:<input type="text" name="forename"><br>
-    Last name:<input type="text" name="surname"><br>
-    Email Address:<input type="text" name="email"><br>
-    Password:<input type="password" name="password"><br>
-    Date of Birth:<input type="date" name="dob"><br>
+    User ID: <input type="text" name="userid"><br>
+    Date Ordered:<input type="date" name="date"><br>
     <br>
-    <!--role radio button-->
-    <input type="radio" name="role" value="User" checked> User<br>
-    <input type="radio" name="role" value="Admin"> Admin<br>
+    <!--radio buttons-->
+    <input type="radio" name="paid" value="User" checked> User<br>
+    <input type="radio" name="paid" value="Admin"> Admin<br>
     <input type="submit" value="Add User">
+
+    <input type="radio" name="status" value="User" checked> User<br>
+    <input type="radio" name="status" value="Admin"> Admin<br>
+    <input type="radio" name="status" value="Admin"> Admin<br>
+    <input type="submit" value="Add User">
+
     </form>
     <h2>Current users</h2>
     <?php

@@ -2,9 +2,10 @@
 include_once("connection.php");
 
 if (
-    isset($_POST["userid"], $_POST["bookid"], $_POST["isbn"], $_POST["borrowdate"], $_POST["status"])
+    isset($_POST["orderid"], $_POST["userid"], $_POST["date"], $_POST["paid"], $_POST["status"])
 ) {
     array_map("htmlspecialchars", $_POST);
+
 
     switch ($_POST["paid"]) {
         case "Unpaid":
@@ -34,13 +35,14 @@ if (
             $status = null;
     }
     
+    
 
 
     if ($paid !== null) {
             $stmt = $conn->prepare("INSERT INTO tblorders(userid, bookid, isbn, borrowdate, duedate, status)
                 VALUES (:userid, :bookid, :isbn, :borrowdate, :duedate, :status)");
             
-        //try {
+        try {
             $stmt->bindParam(':userid', $_POST["userid"]);
             $stmt->bindParam(':bookid', $_POST["bookid"]);
 			$stmt->bindParam(':isbn', $_POST["isbn"]);
@@ -51,13 +53,13 @@ if (
             $stmt->execute();
 
             
-         //   header('Location: users.php');
-         //   exit();
-       // } catch (PDOException $e) {
+            header('Location: users.php');
+            exit();
+        } catch (PDOException $e) {
             
-        //    error_log("Database error: " . $e->getMessage());
-         //   echo "An error occurred. Please try again later.";
-        //}
+            error_log("Database error: " . $e->getMessage());
+            echo "An error occurred. Please try again later.";
+        }
     
     } else {
         echo "Please select loan status.";
