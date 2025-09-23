@@ -17,7 +17,7 @@ $stmt = $conn->prepare("DROP TABLE IF EXISTS tblusers;
 CREATE TABLE tblusers 
 (userid INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 email VARCHAR(76) NOT NULL,
-password CHAR(20) NOT NULL,
+password VARCHAR(255) NOT NULL,
 forename VARCHAR(255) NOT NULL,
 surname VARCHAR(255) NOT NULL,
 role TINYINT(1) NOT NULL)"
