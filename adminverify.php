@@ -17,8 +17,6 @@ $stmt->execute();
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
 if (($row["role"] != 1))
 {   
-    echo "Invalid Credentials<br>
-    <form>
-    Have an account? <a href="login.php">Log In Here</a><br>"
+    echo "Invalid Credentials";
 }
 ?>
