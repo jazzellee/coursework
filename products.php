@@ -1,35 +1,41 @@
+<?php
+include_once("adminverify.php");
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
     
-    <title>Orders</title>
+    <title>Products</title>
     
 </head>
 <body>
-    <form action="addorders.php" method="POST">
-    User ID:<input type="text" name="forename"><br>
-    Last name:<input type="text" name="surname"><br>
-    Password:<input type="password" name="passwd"><br>
-    Date of Birth:<input type="date" name="dob"><br>
-    Email Address:<input type="text" name="email"><br>
+    <form action="addproducts.php" method="POST">
+    <label for="type">Product Type:</label>
+    <select name="type">
+        <option value="Clothing">Clothing</option>
+        <option value="Artwork">Artwork</option>
+    </select><br>
     <br>
-    <!--Next 3 lines create a radio button which we can use to select the user role-->
-    <input type="radio" name="role" value="User" checked> User<br>
-    <input type="radio" name="role" value="Admin"> Admin<br>
-    <input type="submit" value="Add User">
+    Product Name:<input type="text" name="surname"><br>
+    Stock:<input type="number" name="stock" min="0" max="999999"><br>
+    Price: £<input type="number" name="price" min="0.00" max="99999999.99" step="0.01"><br>
+    Description:<input type="text" name="description"><br>
+    <input type="submit" value="Add Product">
     </form>
-    <h2>Current users</h2>
+    <h2>All Products</h2>
     <?php
     include_once("connection.php");
-    $stmt = $conn->prepare("SELECT * FROM tblusers");
+    $stmt = $conn->prepare("SELECT * FROM tblproducts");
     $stmt->execute();
     while ($row=$stmt->fetch(PDO::FETCH_ASSOC))
         {
-            #print_r($row);
-            echo($row["forename"]." ".$row["surname"]."<br>");
+            echo($row["productid"]." ".$row["productname"]." ".$row["stock"]." ".$row["price"]." ".$row["description"]." ".$row["dimensions"]." ".$row["size"]."<br>");
         }
 
     ?>
 
 </body>
 </html>
+
