@@ -3,53 +3,35 @@ include_once("connection.php");
 
 
 if (
-    isset($_POST["forename"], $_POST["surname"], $_POST["email"], $_POST["password"], $_POST["email"], $_POST["role"])
+    isset($_POST["type"], $_POST["productname"], $_POST["stock"], $_POST["price"], $_POST["description"], $_POST["dimensions"], $_POST["size"])
 ) {
     array_map("htmlspecialchars", $_POST);
-
-    switch ($_POST["role"]) {
-        case "User":
-            $role = 0;
-            break;
-        case "Admin":
-            $role = 1;
-            break;
-        default:
-            $role = null;
-    } 
-
-    if ($role !== null) {
-        try {
-		print_r($_POST,"\n");
-			$pw = password_hash($_POST["password"], PASSWORD_BCRYPT); // Password hashing
-            $stmt = $conn->prepare("INSERT INTO tblusers (userid, forename, surname, email, password, role)
-                VALUES (:userid, :forename, :surname, :email, :password, :role)");
-
-            $stmt->bindParam(':userid', $userid);
-            $stmt->bindParam(':forename', $_POST["forename"]);
-            $stmt->bindParam(':surname', $_POST["surname"]);
-            $stmt->bindParam(':email', $_POST["email"]);
-            $stmt->bindParam(':password', $pw);
-            $stmt->bindParam(':role', $role);
-
-            $stmt->execute();
-        
-        echo "User added"."</br>";
-        echo "Your User ID is: ",$userid."</br>";
-            
-           header('Location: users.php');
-            exit();
-        } catch (PDOException $e) {
-            
-            error_log("Database error: " . $e->getMessage());
-            echo "An error occurred. Please try again later.";
-        }
-    } else {
-        echo "Invalid role provided.";
-    }
-} else {
-    echo "Incomplete form submission.";
 }
+
+
+try {
+    $stmt = $conn->prepare("INSERT INTO tblproducts (type, productname, stock, price, description, dimensions, size)
+        VALUES (:type, :productname, :stock, :price, :description, dimensions, size)");
+
+    $stmt->bindParam(':type', $_POST["type"]);
+    $stmt->bindParam(':productname', $_POST["productname"]);
+    $stmt->bindParam(':stock', $_POST["stock"]);
+    $stmt->bindParam(':price', $_POST["price"]);
+    $stmt->bindParam(':description', $_POST["description"]);
+    $stmt->bindParam(':dimensions', $_POST["dimensions"]);
+    $stmt->bindParam(':size', $_POST["size"]);
+    $stmt->execute();
+  
+    echo('Product added:');
+    echo($_POST["type"], $_POST["productname"], $_POST["stock"], $_POST["price"], $_POST["description"], $_POST["dimensions"], $_POST["size"])
+    header('Location: products.php');
+    exit();
+} catch (PDOException $e) {
+    
+    error_log("Database error: " . $e->getMessage());
+    echo "An error occurred. Please try again later.";
+}
+
 
 $conn = null;
 ?>

@@ -1,5 +1,6 @@
 <?php
 session_start();
+include_once ("loginredirect.php");
 //displays name of the user that is currently logged in
 if (isset($_SESSION['name'])) {
 $userid = $_SESSION['name'];

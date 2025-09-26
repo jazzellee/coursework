@@ -1,11 +1,5 @@
 <?php
-session_start();
-
-if (!isset($_SESSION['name']))
-{   
-    header("Location:login.php");
-}
-
+include_once("loginredirect.php");
 include_once("connection.php");
 if (isset($_SESSION['name'])) {
 $userid = $_SESSION['name'];
@@ -20,3 +14,5 @@ if (($row["role"] != 1))
     echo "Invalid Credentials";
 }
 ?>
+
+

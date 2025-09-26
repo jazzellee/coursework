@@ -1,10 +1,7 @@
 <?php
 session_start(); //prevents session bypass
-if (!isset($_SESSION['name']))
-{   
-    header("Location:login.php"); //redirects to login if there is nothing set for the name session
-}
 
+include_once ("loginredirect.php");
 include_once ("connection.php");
 array_map("htmlspecialchars", $_POST);
 $stmt = $conn->prepare("SELECT * FROM tblusers WHERE email = :email ;" );
