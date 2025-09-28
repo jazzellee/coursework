@@ -10,8 +10,8 @@ if (
 
 
 try {
-    $stmt = $conn->prepare("INSERT INTO tblproducts (type, productname, stock, price, description, dimensions, size)
-        VALUES (:type, :productname, :stock, :price, :description, dimensions, size)");
+    $stmt = $conn->prepare("INSERT INTO tblproducts (productid, type, productname, stock, price, description, dimensions, size)
+        VALUES (NULL, :type, :productname, :stock, :price, :description, dimensions, size)");
 
     $stmt->bindParam(':type', $_POST["type"]);
     $stmt->bindParam(':productname', $_POST["productname"]);
@@ -22,16 +22,15 @@ try {
     $stmt->bindParam(':size', $_POST["size"]);
     $stmt->execute();
   
-    echo('Product added:');
-    echo($_POST["type"], $_POST["productname"], $_POST["stock"], $_POST["price"], $_POST["description"], $_POST["dimensions"], $_POST["size"])
-    header('Location: products.php');
+    header('Location: newproduct.php');
     exit();
-} catch (PDOException $e) {
-    
+} catch (PDOException $e) { 
     error_log("Database error: " . $e->getMessage());
     echo "An error occurred. Please try again later.";
 }
 
-
 $conn = null;
 ?>
+
+
+

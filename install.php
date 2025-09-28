@@ -56,6 +56,7 @@ $stmt = $conn->prepare("DROP TABLE IF EXISTS tblproducts;
 CREATE TABLE tblproducts 
 (productid INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 productname VARCHAR(255) NOT NULL,
+type TINYINT(1) NOT NULL,
 stock INT(6) NOT NULL,
 price DECIMAL(10,2) NOT NULL,
 description VARCHAR(2047) NOT NULL,

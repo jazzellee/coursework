@@ -33,8 +33,10 @@ include_once("adminverify.php");
     </select><br>
     <input type="submit" value="Add Product">
     </form>
+
+    
     <h2>All Products</h2>
-    <?php
+    <?php //displays all products in the system
     include_once("connection.php");
     $stmt = $conn->prepare("SELECT * FROM tblproducts");
     $stmt->execute();
@@ -47,4 +49,7 @@ include_once("adminverify.php");
 
 </body>
 </html>
+
+
+
 
