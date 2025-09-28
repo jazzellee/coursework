@@ -1,6 +1,7 @@
 <?php
 include_once("loginredirect.php");
 include_once("adminverify.php");
+include_once("displayuserdetails.php");
 ?>
 
 
@@ -26,7 +27,7 @@ include_once("adminverify.php");
     Dimensions:<input type="text" name="dimensions"><br>
     <label for="size">Size:</label>
     <select name="size">
-        <option value="none"></option>
+        <option value=""></option>
         <option value="S">S</option>
         <option value="M">M</option>
         <option value="L">L</option>
@@ -42,7 +43,7 @@ include_once("adminverify.php");
     $stmt->execute();
     while ($row=$stmt->fetch(PDO::FETCH_ASSOC))
         {
-            echo($row["productid"]." ".$row["productname"]." ".$row["stock"]." ".$row["price"]." ".$row["description"]." ".$row["dimensions"]." ".$row["size"]."<br>");
+            echo($row["productid"]." ".$row["type"]." ".$row["productname"]." ".$row["stock"]." ".$row["price"]." ".$row["description"]." ".$row["dimensions"]." ".$row["size"]."<br>");
         }
 
     ?>
