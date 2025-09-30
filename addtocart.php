@@ -1,45 +1,41 @@
 <?php
 session_start();
-include_once("connection.php");
 
-    try {
-        array_map("htmlspecialchars", $_POST);
-        $userid = $_SESSION['name'];
-        //creates order
-        $stmt = $conn->prepare("INSERT INTO tblorders (orderid, userid, date, paid, status)
-            VALUES (NULL, :userid, NULL, NULL, NULL)");
-
-        $stmt->bindParam(':userid', $userid);
-        $stmt->execute();
-        $orderid = $conn->lastInsertId();
-
-        header('Location: newproduct.php');
-        exit();
-    } catch (PDOException $e) { 
-        error_log("Database error: " . $e->getMessage());
-        echo "An error occurred. Please try again later.";
-    }
+//creates basket if not created
+if (!isset($_SESSION["item"])){
+$_SESSION["item"]=array();
+}
 
 
-//processes the array and adds entries to cart
-foreach ($_SESSION['cart'] as $entry) {
-    try {
-        $stmt = $conn->prepare("INSERT INTO tblcart (cartid, orderid, productid, quantity)
-            VALUES (NULL, :orderid, :productid, :quantity)");
 
-        $stmt->bindParam(':orderid', $orderid);
-        $stmt->bindParam(':productid', $productid);
-        $stmt->bindParam(':quantity', $quantity);
-        $stmt->execute();
+//product already in array
+$found=FALSE;
+foreach ($_SESSION["item"] as &$entry){
     
-    } catch (PDOException $e) { 
-        error_log("Database error: " . $e->getMessage());
-        echo "An error occurred. Please try again later.";
+    if ($entry["item"]===$_POST["productid"]){
+        $found=TRUE;
+        //increase existing qty in cart
+        $entry["qty"]=$entry["qty"]+$_POST["qty"];
+        
+        
     }
 }
 
-$conn = null;
+
+//product not in array
+if ($found===FALSE){
+    array_push($_SESSION["item"],array("item"=>$_POST["productid"],"qty"=>$_POST["qty"]));
+}
+
+//update stock
+$stmt = $conn->prepare("UPDATE tblproducts SET quantity=quantity-:qty WHERE productid=:productid");
+$stmt->bindParam(':productid', $_SESSION["item"]);
+$stmt->bindParam(':qty', $_SESSION["qty"]);
+$stmt->execute();
+$stmt->closeCursor();
+
+header('Location: displayproducts.php');
+exit();
+
 ?>
-
-
 
