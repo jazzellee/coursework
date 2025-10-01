@@ -21,6 +21,10 @@ include_once("loginredirect.php");
     <?php
     $total=0;
     echo("<tr>");
+    if (!isset($_SESSION["item"])){
+        $_SESSION["item"]=array();
+    }
+
     foreach ($_SESSION["item"] as $item){
 
         echo("<br>");
@@ -36,7 +40,7 @@ include_once("loginredirect.php");
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
             {
                 echo("<td>".$row["productname"]."</td><td> ".$item["qty"]." </td><td>- £".number_format(($item["qty"]*$row["price"]),2)."</td></tr>");
-                $total=$total+($tuck["qty"]*$row["price"]);
+                $total=$total+($item["qty"]*$row["price"]);
             }
     }
     echo("<tr><td></td><td>Total cost: </td><td>£".number_format($total,2)."</td></tr>");

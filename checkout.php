@@ -40,7 +40,7 @@ foreach ($_SESSION['item'] as $entry) {
 
 
 $conn = null;
-unset($_SESSION["tuck"]);
+unset($_SESSION["item"]);
 header('Location: homepage.php');
 exit();
 ?>

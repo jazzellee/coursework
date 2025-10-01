@@ -14,7 +14,10 @@ if (!isset($_SESSION['name']))
 }else{
 	include_once("displayuserdetails.php");
 	echo '<a href="viewcart.php">View Cart</a><br><br>';
-	echo 'items in cart: '.count($_SESSION["item"]);
+
+	if (isset($_SESSION["item"])){
+		echo 'items in cart: '.count($_SESSION["item"]);
+	}
 }
 
 
@@ -50,7 +53,7 @@ if (!isset($_SESSION['name']))
 		}
 	$stmt->closeCursor();
 ?>
-<a href="displayproducts.php">Back to Top</a>
+<br><br><a href="displayproducts.php">Back to Top</a>
 </body>
 </html>
 
