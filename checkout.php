@@ -4,7 +4,7 @@ include_once("connection.php");
 
     try {
         array_map("htmlspecialchars", $_POST);
-        $userid = $_SESSION['name'];
+        $userid = $_SESSION['userid'];
         //creates order
         $stmt = $conn->prepare("INSERT INTO tblorders (orderid, userid, date, paid, status)
             VALUES (NULL, :userid, NULL, NULL, NULL)");

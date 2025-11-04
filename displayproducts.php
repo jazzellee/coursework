@@ -7,7 +7,7 @@
 include_once('connection.php');
 session_start();
 
-if (!isset($_SESSION['name']))
+if (!isset($_SESSION['userid']))
 {   
 	$_SESSION['backURL'] = $_SERVER['REQUEST_URI'];
     echo '<a href="login.php">Log in to add items to your cart</a><br><br>';
@@ -43,7 +43,7 @@ if (!isset($_SESSION['name']))
 			}
 			
 				
-			if ($isset($_SESSION['name'])) {
+			if ($isset($_SESSION['userid'])) {
 				echo '<input type="submit" value="Add to Cart">';
 			} else {
 				echo '<input type="button" value="Add to Cart" onclick="alert(\'Please log in to add items to your cart.\')">';
