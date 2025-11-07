@@ -35,6 +35,14 @@ $stmt->execute();
 $stmt->closeCursor();
 echo("admin created");
 
+//hardcodes testing user
+$testingpassword = password_hash('testing', PASSWORD_BCRYPT);
+$stmt = $conn->prepare("INSERT INTO tblusers(userid, email, password, forename, surname, role)VALUES
+    (NULL, 'testing@gmail.com', '$testingpassword', 'testing', 'testing', 0)");
+$stmt->execute();
+$stmt->closeCursor();
+echo("testing user created");
+
 
 
 //creates tblorders

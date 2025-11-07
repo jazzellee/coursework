@@ -29,22 +29,23 @@
 </head>
 <body>
     <form action="addusers.php" method="POST">
-    First name:<input type="text" name="forename"><br>
-    Last name:<input type="text" name="surname"><br>
-    Email Address:<input type="text" name="email"><br>
-    Password:<input type="password" name="password"><br>
-    Date of Birth:<input type="date" name="dob"><br>
+    First name:<input type="text" name="forename" required><br>
+    Last name:<input type="text" name="surname" required><br>
+    Email Address:<input type="text" name="email" required><br>
+    Password:<input type="password" name="password" required><br>
+    Date of Birth:<input type="date" name="dob" required><br>
     <br>
     <!--role radio button-->
     <input type="radio" name="role" value="User" checked> User<br>
     <input type="radio" name="role" value="Admin"> Admin<br>
     <input type="submit" value="Add User">
+    </form>
 
     <div class="signup-link">
             Have an account? <a href="login.php">Log In Here</a>
         </div>
 
-    </form>
+    
 
 </body>
 </html>
