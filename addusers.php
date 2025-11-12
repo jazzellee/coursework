@@ -2,7 +2,7 @@
 session_start();
 include_once("connection.php");
 
-
+ 
 if (
     isset($_POST["forename"], $_POST["surname"], $_POST["email"], $_POST["password"], $_POST["email"], $_POST["role"])
 ) {
