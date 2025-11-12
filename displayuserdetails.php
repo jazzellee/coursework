@@ -10,7 +10,9 @@
     <?php
     //displays name of the user that is currently logged in
     if (isset($_SESSION['name'])) {
-    $userid = $_SESSION['name'];
+        $userid = $_SESSION['name'];
+    }else{
+        echo('<a href="login.php">Log In</a><br><br>');
     }
 
     include_once("connection.php");
