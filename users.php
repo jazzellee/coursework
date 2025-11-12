@@ -32,7 +32,7 @@
     First name:<input type="text" name="forename" required><br>
     Last name:<input type="text" name="surname" required><br>
     Email Address:<input type="text" name="email" required><br>
-    Password:<input type="password" name="password" required><br>
+    Password:<input type="password" name="password" required minlength="8" maxlength="20"><br>
     Date of Birth:<input type="date" name="dob" required><br>
     <br>
     <!--role radio button-->
