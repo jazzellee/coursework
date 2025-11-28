@@ -14,10 +14,16 @@ if ($row) {
     $attempt = $_POST['passwd'];
 
     if (password_verify($attempt, $hashed)) {
-        $_SESSION['name'] = $row["userid"];
-        $backURL = isset($_SESSION['backURL']) ? $_SESSION['backURL'] : "homepage.php"; // sets a default destination if no backURL set
-        unset($_SESSION['backURL']);
-        header('Location: ' . $backURL);
+        $_SESSION['userid'] = $row["userid"];
+
+        if($row["role"] == 1){
+           header('Location: admin.php');
+        } else {
+            $backURL = isset($_SESSION['backURL']) ? $_SESSION['backURL'] : "homepage.php"; // sets a default destination if no backURL set
+            unset($_SESSION['backURL']);
+            header('Location: ' . $backURL);
+        }
+        
         exit();
     }
 }

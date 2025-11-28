@@ -1,7 +1,8 @@
 <?php
 include_once("connection.php");
-if (isset($_SESSION['name'])) {
-$userid = $_SESSION['name'];
+include_once("loginredirect.php");
+if (isset($_SESSION['userid'])) {
+$userid = $_SESSION['userid'];
 }
 
 $stmt = $conn->prepare("SELECT role FROM tblusers WHERE userid=?");

@@ -9,8 +9,8 @@
     <h2>Current User:
     <?php
     //displays name of the user that is currently logged in
-    if (isset($_SESSION['name'])) {
-        $userid = $_SESSION['name'];
+    if (isset($_SESSION['userid'])) {
+        $userid = $_SESSION['userid'];
     }else{
         echo('<a href="login.php">Log In</a><br><br>');
     }

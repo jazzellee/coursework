@@ -75,16 +75,6 @@ $stmt->execute();
 $stmt->closeCursor();
 echo("tblproducts created");
 
-//creates tbltype
-$stmt = $conn->prepare("DROP TABLE IF EXISTS tbltype;
-CREATE TABLE tbltype 
-(typeid INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-typename VARCHAR(255) NOT NULL)"
-);
-$stmt->execute();
-$stmt->closeCursor();
-echo("tbltype created");
-
 
 //creates tblcart
 $stmt = $conn->prepare("DROP TABLE IF EXISTS tblcart;
@@ -105,3 +95,15 @@ catch(PDOException $e)
 }
 $conn=Null;
 ?>
+
+
+
+<!-- //creates tbltype
+$stmt = $conn->prepare("DROP TABLE IF EXISTS tbltype;
+CREATE TABLE tbltype 
+(typeid INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+typename VARCHAR(255) NOT NULL)"
+);
+$stmt->execute();
+$stmt->closeCursor();
+echo("tbltype created"); -->
