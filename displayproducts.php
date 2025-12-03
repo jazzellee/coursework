@@ -49,11 +49,12 @@ if (!isset($_SESSION['userid']))
 				echo '<input type="button" value="Add to Cart" onclick="alert(\'Please log in to add items to your cart.\')">';
 			}
 			echo '<br><br>';
-			echo "</form>";
+			echo "</form>"; 
 		}
 	$stmt->closeCursor();
 ?>
 <br><br><a href="displayproducts.php">Back to Top</a>
 </body>
 </html>
+
 
