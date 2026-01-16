@@ -14,10 +14,14 @@ if (!isset($_SESSION['userid']))
 }else{
 	include_once("displayuserdetails.php");
 	echo '<a href="viewcart.php">View Cart</a><br><br>';
+}
 
-	if (isset($_SESSION["item"])){
-		echo 'items in cart: '.count($_SESSION["item"]);
+	if (isset($_SESSION["item"])){ //displays no. of items in cart
+		$count = 0;
+		foreach ($_SESSION['item'] as $entry) {
+			$count += $entry["qty"];
 	}
+	echo 'items in cart: '.$count;
 }
 
 
@@ -27,12 +31,14 @@ if (!isset($_SESSION['userid']))
 		{//uses a hidden input which contains the ID of the product selected
 			echo'<form action="addtocart.php" method="post">';
 
-			if ($row["quantity"]==0){
+			if ($row["stock"]<=0){
+				echo $row["productname"].' £'.$row["price"]."<br>";
 				echo '<span style="color: red;">Out of Stock</span><br>';
 
-			} elseif ($row["quantity"]<=5){ 
-				$available = $row["quantity"];
-				echo $row["productname"].' £'.$row["price"]."<br>
+			} elseif ($row["stock"]<=5){ 
+				$available = $row["stock"];
+				echo $row["productname"].' £'.$row["price"]."<br>";
+				echo 'Only '. $available.' left!'. "<br>
 				<input type='number' name='qty' min='1' max='$available' value='1'>
 				<input type='hidden' name='productid' value=".$row['productid']."'>";
 
@@ -42,12 +48,14 @@ if (!isset($_SESSION['userid']))
 				<input type='hidden' name='productid' value=".$row['productid']."'>";
 			}
 			
-				
-			if ($isset($_SESSION['userid'])) {
-				echo '<input type="submit" value="Add to Cart">';
-			} else {
+			if (!isset($_SESSION['userid']) and $row["stock"]>0) {
 				echo '<input type="button" value="Add to Cart" onclick="alert(\'Please log in to add items to your cart.\')">';
+			} elseif ($row["stock"] <= 0) {
+				echo '<input type="button" value="Add to Cart" disabled>';
+			} else {
+				echo '<input type="submit" value="Add to Cart">';
 			}
+
 			echo '<br><br>';
 			echo "</form>"; 
 		}
