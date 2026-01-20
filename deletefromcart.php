@@ -4,7 +4,7 @@ session_start();
 $entry["quantity"]=$entry["quantity"]-1;
 
 //update stock
-$stmt = $conn->prepare("UPDATE tblproducts SET quantity=quantity+1 WHERE productid=:productid");
+$stmt = $conn->prepare("UPDATE tblproducts SET stock = stock +1 WHERE productid=:productid");
 $stmt->bindParam(':productid', $entry["item"]);
 $stmt->execute();
 $stmt->closeCursor(); 
