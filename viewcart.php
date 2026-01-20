@@ -39,8 +39,8 @@ include_once("loginredirect.php");
         
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
             {
-                echo("<td>".$row["productname"]."</td><td> ".$item["qty"]." </td><td>- £".number_format(($item["qty"]*$row["price"]),2)."</td></tr>");
-                $total=$total+($item["qty"]*$row["price"]);
+                echo("<td>".$row["productname"]."</td><td> ".$item["quantity"]." </td><td>- £".number_format(($item["quantity"]*$row["price"]),2)."</td></tr>");
+                $total=$total+($item["quantity"]*$row["price"]);
             }
     }
     echo("<tr><td></td><td>Total cost: </td><td>£".number_format($total,2)."</td></tr>");

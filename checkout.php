@@ -27,7 +27,7 @@ foreach ($_SESSION['item'] as $entry) {
 
         $stmt->bindParam(':orderid', $lastorderid);
         $stmt->bindParam(':productid', $entry["item"]);
-        $stmt->bindParam(':quantity', $entry["qty"]);
+        $stmt->bindParam(':quantity', $entry["quantity"]);
         $stmt->execute();
         $stmt->closeCursor();
 

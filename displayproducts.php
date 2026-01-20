@@ -27,23 +27,23 @@ if (!isset($_SESSION['userid']))
 		{//uses a hidden input which contains the ID of the product selected
 			echo'<form action="addtocart.php" method="post">';
 
-			if ($row["quantity"]==0){
+			if ($row["stock"]==0){
 				echo '<span style="color: red;">Out of Stock</span><br>';
 
-			} elseif ($row["quantity"]<=5){ 
-				$available = $row["quantity"];
+			} elseif ($row["stock"]<=5){ 
+				$available = $row["stock"];
 				echo $row["productname"].' £'.$row["price"]."<br>
-				<input type='number' name='qty' min='1' max='$available' value='1'>
+				<input type='number' name='quantity' min='1' max='$available' value='1'>
 				<input type='hidden' name='productid' value=".$row['productid']."'>";
 
 			} else {
 				echo $row["productname"].' £'.$row["price"]."<br>
-				<input type='number' name='qty' min='1' max='5' value='1'>
+				<input type='number' name='quantity' min='1' max='5' value='1'>
 				<input type='hidden' name='productid' value=".$row['productid']."'>";
 			}
 			
 				
-			if ($isset($_SESSION['userid'])) {
+			if (isset($_SESSION['userid'])) {
 				echo '<input type="submit" value="Add to Cart">';
 			} else {
 				echo '<input type="button" value="Add to Cart" onclick="alert(\'Please log in to add items to your cart.\')">';

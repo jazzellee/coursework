@@ -8,7 +8,7 @@ foreach ($_SESSION['item'] as $entry) {
         $stmt = $conn->prepare("UPDATE tblproducts SET quantity=quantity+:qty WHERE productid=:productid");
 
         $stmt->bindParam(':productid', $entry["item"]);
-        $stmt->bindParam(':qty', $entry["qty"]);
+        $stmt->bindParam(':quantity', $entry["quantity"]);
         $stmt->execute();
         $stmt->closeCursor();
 

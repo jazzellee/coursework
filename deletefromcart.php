@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$entry["qty"]=$entry["qty"]-1;
+$entry["quantity"]=$entry["quantity"]-1;
 
 //update stock
 $stmt = $conn->prepare("UPDATE tblproducts SET quantity=quantity+1 WHERE productid=:productid");
@@ -10,7 +10,7 @@ $stmt->execute();
 $stmt->closeCursor(); 
 
 
-if ($entry["qty"] <= 0) {
+if ($entry["quantity"] <= 0) {
     // Removes item from cart if quantity is zero or less
     foreach ($_SESSION["item"] as $key => $item) {
         if ($item["item"] === $entry["item"]) {
