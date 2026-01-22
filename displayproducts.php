@@ -21,7 +21,7 @@ if (!isset($_SESSION['userid']))
 		foreach ($_SESSION['item'] as $entry) {
 			$count += $entry["qty"];
 	}
-	echo 'items in cart: '.$count;
+	echo 'Items in cart: '.$count;
 }
 
 
@@ -44,7 +44,7 @@ if (!isset($_SESSION['userid']))
 
 			} else {
 				echo $row["productname"].' £'.$row["price"]."<br>
-				<input type='number' name='quantity' min='1' max='5' value='1'>
+				<input type='number' name='qty' min='1' max='5' value='1'>
 				<input type='hidden' name='productid' value=".$row['productid']."'>";
 			}
 			
