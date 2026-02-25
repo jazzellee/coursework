@@ -2,7 +2,7 @@
 session_start();
 include_once("connection.php");
 
-//creates basket if not created
+//creates cart if not created
 if (!isset($_SESSION["item"]) || !is_array($_SESSION["item"])) {
     $_SESSION["item"] = array();
 }

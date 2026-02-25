@@ -1,27 +1,51 @@
 <?php
 session_start();
+include_once("connection.php");
 
-$entry["qty"]=$entry["qty"]-1;
+if (!isset($_POST['productid'])) {
+    header('Location: viewcart.php');
+    exit();
+}
+$productid = (int) $_POST['productid'];
 
-//update stock
-$stmt = $conn->prepare("UPDATE tblproducts SET stock = stock +1 WHERE productid=:productid");
-$stmt->bindParam(':productid', $entry["item"]);
-$stmt->execute();
-$stmt->closeCursor(); 
+//redirects back to viewcart if no cart
+if (!isset($_SESSION["item"]) || !is_array($_SESSION["item"])){
+    header('Location: viewcart.php');
+    exit();
+}
 
+$found = false;
 
-if ($entry["qty"] <= 0) {
-    // Removes item from cart if quantity is zero or less
-    foreach ($_SESSION["item"] as $key => $item) {
-        if ($item["item"] === $entry["item"]) {
+//finds corresponding item in session cart and decrements quantity by 1
+foreach ($_SESSION["item"] as $key => $entry) {
+    if ((int)$entry["item"] === $productid) {
+        $found = true;
+        $newqty = (int)$entry["qty"] - 1;
+
+        if ($newqty > 0) {
+            // update session qty directly
+            $_SESSION["item"][$key]["qty"] = $newqty;
+        } else {
+            // remove item from cart
             unset($_SESSION["item"][$key]);
-            break;
         }
+
+        // update stock in tblproducts
+        $stmt = $conn->prepare("UPDATE tblproducts SET stock = stock + 1 WHERE productid = :productid");
+        $stmt->bindValue(':productid', $productid, PDO::PARAM_INT);
+        $stmt->execute();
+        $stmt->closeCursor();
+
+        break;
     }
-    // Reindexes the array to maintain proper indices
+}
+
+
+if ($found) {
+    // Reindexes the array to maintain proper indices after any unset
     $_SESSION["item"] = array_values($_SESSION["item"]);
 }
 
-header('Location: viewcart.php');
+    header('Location: viewcart.php');
 
 ?>

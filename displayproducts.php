@@ -21,7 +21,7 @@ if (!isset($_SESSION['userid'])) //reminder to log in in order to add items to c
 		foreach ($_SESSION['item'] as $entry) {
 			$count += $entry["qty"];
 	}
-	echo 'items in cart: '.$count;
+	echo 'Items in cart: '.$count;
 }
 
 
