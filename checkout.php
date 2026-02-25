@@ -6,8 +6,8 @@ include_once("connection.php");
         array_map("htmlspecialchars", $_POST);
         $userid = $_SESSION['userid'];
         //creates order
-        $stmt = $conn->prepare("INSERT INTO tblorders (orderid, userid, date, paid, status)
-            VALUES (NULL, :userid, NULL, NULL, NULL)");
+        $stmt = $conn->prepare("INSERT INTO tblorders (orderid, userid, date)
+            VALUES (NULL, :userid, NULL)");
 
         $stmt->bindParam(':userid', $userid);
         $stmt->execute();
@@ -25,9 +25,9 @@ foreach ($_SESSION['item'] as $entry) {
         $stmt = $conn->prepare("INSERT INTO tblcart (cartid, orderid, productid, quantity)
             VALUES (NULL, :orderid, :productid, :quantity)");
 
-        $stmt->bindParam(':orderid', $lastorderid);
-        $stmt->bindParam(':productid', $entry["item"]);
-        $stmt->bindParam(':quantity', $entry["quantity"]);
+        $stmt->bindValue(':orderid', $lastorderid, PDO::PARAM_INT);
+        $stmt->bindValue(':productid', $entry['item'], PDO::PARAM_INT);
+        $stmt->bindValue(':quantity', $entry['qty'], PDO::PARAM_INT);
         $stmt->execute();
         $stmt->closeCursor();
 
