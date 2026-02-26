@@ -22,6 +22,9 @@ if (isset($_REQUEST["productid"])) {
             $size = $row["size"];
             $productname = $row["productname"];
         }
+} else {
+    header("Location: adminproducts.php");
+    exit();
 }
 
 ?>
@@ -64,14 +67,20 @@ if (isset($_REQUEST["productid"])) {
     <button type='submit' title='Confirm'>Confirm</button>
     </form>
 
+    <!-- button to delete product, with confirmation prompt -->
     <form action="deleteproduct.php" method="POST">
         <input type="hidden" name="productid" value="<?php echo ($productid); ?>">
         <button type="submit" onclick="return confirm('Delete product?');">Delete Product</button>
     </form>
 
+    <br><br>
+
+    <!-- redirects to adminproducts.php (back button) -->
+    <form action="adminproducts.php" method="GET">
+        <button type="submit">Back to Products</button>
+    </form>
+
 </body>
 </html>
-
-
 
 
