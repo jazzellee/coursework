@@ -9,9 +9,8 @@ include_once("displayuserdetails.php");
 <!DOCTYPE html>
 <html>
 <head>
-    
     <title>Products</title>
-    
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <form action="addproducts.php" method="POST">
@@ -38,16 +37,32 @@ include_once("displayuserdetails.php");
 
     
     <h2>All Products</h2>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Description</th>
+            <th>Dimensions</th>
+            <th>Size</th>
+        </tr>
     <?php //displays all products in the system
     include_once("connection.php");
     $stmt = $conn->prepare("SELECT * FROM tblproducts");
     $stmt->execute();
     while ($row=$stmt->fetch(PDO::FETCH_ASSOC))
         {
-            echo($row["productid"]." ".$row["type"]." ".$row["productname"]." ".$row["stock"]." ".$row["price"]." ".$row["description"]." ".$row["dimensions"]." ".$row["size"]."<br>");
+            if ($row["type"] == 0) {
+                $row["type"] = "Artwork";
+            } else if ($row["type"] == 1) {
+                $row["type"] = "Clothing";
+            }
+            echo("<tr><td>".$row["productname"]."</td><td>".$row["type"]."</td><td>£".number_format($row["price"],2)."</td><td>".$row["stock"]."</td><td>".$row["description"]."</td><td>".$row["dimensions"]."</td><td>".$row["size"]."</td></tr>");
         }
-
+    $stmt->closeCursor();
     ?>
+    </table>
 
 </body>
 </html>

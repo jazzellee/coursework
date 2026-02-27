@@ -1,6 +1,7 @@
 <?php
 session_start();
 include_once("connection.php");
+include_once("adminverify.php");
 
 if (isset($_POST['productid'])) {
     array_map("htmlspecialchars", $_POST);
@@ -24,7 +25,7 @@ if (isset($_POST['productid'])) {
         $params = [':productid' => $_POST["productid"]];
 
         foreach (['productname', 'stock', 'price', 'description', 'dimensions', 'size'] as $field) {
-            if (!empty($_POST[$field])) {
+            if (($_POST[$field])!=="") {
                 $update[] = "$field = :$field";
                 $params[":$field"] = $_POST[$field];
             }

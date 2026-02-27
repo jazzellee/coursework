@@ -1,6 +1,7 @@
 <?php
 session_start();
-include_once("displayuserdetails.php");
+include_once("navbar.php");
+
 ?>
 
 

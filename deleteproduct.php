@@ -1,6 +1,7 @@
 <?php
 session_start();
 include_once("connection.php");
+include_once("adminverify.php");
 
 if (isset($_POST["productid"])) {
     array_map("htmlspecialchars", $_POST);
@@ -9,7 +10,7 @@ if (isset($_POST["productid"])) {
     $stmt->bindParam(":productid", $_POST["productid"]);
     $stmt->execute();
     
-    header('Location: displayproducts.php');
+    header('Location: adminproducts.php');
     exit();
 
 } else {

@@ -52,7 +52,7 @@ if (isset($_REQUEST["productid"])) {
     </select><br>
     <br>
     Product Name:<input type="text" name="productname" value="<?php echo ($productname); ?>"><br>
-    Stock:<input type="number" name="stock" min="0" max="999999" value="<?php echo ($stock); ?>"><br>
+    Stock:<input type="number" name="stock" min="0" max="999999" step="1" value="<?php echo ($stock); ?>"><br>
     Price: £<input type="number" name="price" min="0.00" max="99999999.99" step="0.01" value="<?php echo ($price); ?>"><br>
     Description:<input type="text" name="description" value="<?php echo ($description); ?>"><br>
     Dimensions:<input type="text" name="dimensions" value="<?php echo ($dimensions); ?>"><br>
