@@ -21,6 +21,7 @@ body {
 }
 #sidebar-content {
     position: fixed;
+    z-index: 20;
     left: 0;
     top: 0;
     width: 320px;
@@ -29,6 +30,8 @@ body {
     border-right: 1px solid #ddd;
     padding: 20px;
     box-sizing: border-box;
+    background-color: white;
+    
 }
 @media (max-width: 640px) {
     #sidebar-content {
@@ -37,6 +40,7 @@ body {
 }
 #main-content {
     transition: margin-left 0.3s;
+    z-index: 0;
 }
 #navbar {
     display: flex;
