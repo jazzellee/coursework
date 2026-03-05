@@ -6,10 +6,10 @@ include_once("displayuserdetails.php");
 
 
 if (isset($_REQUEST["productid"])) {
-    $productIdParam = htmlspecialchars($_REQUEST["productid"]);
+    array_map("htmlspecialchars", $_REQUEST);
     
     $stmt = $conn->prepare("SELECT * FROM tblproducts WHERE productid = :productid");
-    $stmt->bindParam(":productid", $productIdParam);
+    $stmt->bindParam(":productid", $_REQUEST["productid"]);
     $stmt->execute();
     while ($row=$stmt->fetch(PDO::FETCH_ASSOC))
         {

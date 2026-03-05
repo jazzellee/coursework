@@ -99,5 +99,4 @@ echo ('<div id="sidebar-content" style="display:none;">');
 include_once("sidebar.php");
 echo ('</div>');
 
-echo ('<div id="main-content">');
 
