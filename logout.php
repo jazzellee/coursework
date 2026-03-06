@@ -4,7 +4,7 @@ if(isset($_SESSION['userid']))
 {
     unset($_SESSION['userid']);
 }
-header("Location: login.php");
+header("Location: homepage.php");
 ?>
 
 

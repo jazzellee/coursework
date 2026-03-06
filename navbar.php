@@ -19,6 +19,7 @@ body {
     margin: 0;
     padding: 0;
 }
+
 #sidebar-content {
     position: fixed;
     z-index: 20;
@@ -33,26 +34,39 @@ body {
     background-color: white;
     
 }
+
 @media (max-width: 640px) {
     #sidebar-content {
         width: 100vw;
     }
 }
+
 #main-content {
     transition: margin-left 0.3s;
-    z-index: 0;
 }
+
 #navbar {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
     position: relative;
-    z-index: 10;
 }
+
 #navbar-left, #navbar-center, #navbar-right {
     display: flex;
     gap: 20px;
 }
+
+#navbar-left {
+    position: relative;
+    z-index: 30;
+}
+
+#navbar-left button {
+    position: relative;
+    z-index: 31;
+}
+
 #navbar-center {
     flex: 1;
     justify-content: center;

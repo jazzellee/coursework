@@ -4,7 +4,7 @@ session_start();
 include_once('connection.php');
 
 /* displays current user */
-include_once('displayuserdetails.php');
+echo '<a href="userdetails.php">'; include_once('displayuserdetails.php'); echo '</a>';
 
 /* displays products and its separate sections */
 echo '<a href="displayproducts.php">Products</a>'
