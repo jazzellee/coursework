@@ -17,8 +17,8 @@ if (isset($_POST['productid'])) {
     exit();
 
 } else {
-    echo "No productid provided.";
-    echo '<br><br> <a href="adminproducts.php">Back to Products</a>';
+    echo("No productid provided.");
+    echo('<br><br> <a href="adminproducts.php">Back to Products</a>');
 }
 
 $conn = null;

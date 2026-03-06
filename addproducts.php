@@ -36,11 +36,11 @@ if (
         exit();
     } catch (PDOException $e) { 
         error_log("Database error: " . $e->getMessage());
-        echo "An error occurred. Please try again later.";
+        echo("An error occurred. Please try again later.");
     }
 
 } else {
-    echo "Incomplete form submission.";
+    echo("Incomplete form submission.");
 }
 
 $conn = null;

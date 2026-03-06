@@ -2,7 +2,7 @@
 
 $servername = 'localhost';
 $username = 'root';
-$password= '';
+$password = '';
 
 try {
  $conn = new PDO("mysql:host=$servername", $username, $password);
@@ -91,9 +91,9 @@ echo("tblcart created");
 }
 catch(PDOException $e)
 {
-    echo $sql . "<br>" . $e->getMessage();
+    echo($sql . "<br>" . $e->getMessage());
 }
-$conn=Null;
+$conn = Null;
 ?>
 
 

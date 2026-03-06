@@ -38,13 +38,13 @@ if (
         } catch (PDOException $e) {
             
             error_log("Database error: " . $e->getMessage());
-            echo "An error occurred. Please try again later.";
+            echo("An error occurred. Please try again later.");
         }
     } else {
-        echo "Invalid role provided.";
+        echo("Invalid role provided.");
     }
 } else {
-    echo "Incomplete form submission.";
+    echo("Incomplete form submission.");
 }
 
 $conn = null;

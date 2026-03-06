@@ -14,7 +14,7 @@ if (isset($_POST["productid"])) {
     exit();
 
 } else {
-    echo "Invalid request.";
+    echo("Invalid request.");
 } 
 
 $conn = null;

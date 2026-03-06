@@ -9,7 +9,7 @@ if (!isset($_SESSION["item"]) || !is_array($_SESSION["item"])) {
 
 
 //product already in array
-$found=FALSE;
+$found = FALSE;
 
 
 foreach ($_SESSION["item"] as &$entry){

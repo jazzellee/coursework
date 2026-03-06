@@ -14,12 +14,12 @@ if (!isset($_SESSION["item"]) || !is_array($_SESSION["item"])){
     exit();
 }
 
-$found = false;
+$found = FALSE;
 
 //finds corresponding item in session cart and decrements quantity by 1
 foreach ($_SESSION["item"] as $key => $entry) {
     if ((int)$entry["item"] === $productid) {
-        $found = true;
+        $found = TRUE;
         $newqty = (int)$entry["qty"] - 1;
 
         if ($newqty > 0) {

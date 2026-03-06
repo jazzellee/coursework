@@ -27,17 +27,17 @@ include_once("loginredirect.php");
         <th style="visibility:hidden;">Delete</th>
 
     <?php
-    $total=0;
-    if (!isset($_SESSION["item"])){
-        $_SESSION["item"]=array();
+    $total = 0;
+    if (!isset($_SESSION["item"])) {
+        $_SESSION["item"] = array();
     }
 
-    if (count($_SESSION["item"])==0){
+    if (count($_SESSION["item"]) == 0) {
             echo("Your cart is empty");
-            echo "<a href='displayproducts.php'><br>Fill up your cart!</a>";
+            echo("<a href='displayproducts.php'><br>Fill up your cart!</a>");
 
-    }else{
-        foreach ($_SESSION["item"] as $item){
+    } else {
+        foreach ($_SESSION["item"] as $item) {
 
             echo("<br>");
             $stmt = $conn->prepare("SELECT * FROM tblproducts WHERE productid=:productid");
@@ -47,14 +47,14 @@ include_once("loginredirect.php");
             
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
                 {
-                    echo("<tr class='cart-row'><td>".$row["productname"]."</td><td> ".$item["qty"]." </td><td> £".number_format(($item["qty"]*$row["price"]),2)."</td>"
+                    echo("<tr class='cart-row'><td>".$row["productname"]."</td><td> ".$item["qty"]." </td><td> £".number_format(($item["qty"] * $row["price"]),2)."</td>"
                         ."<td>"
                         ."<form class='delete' method='post' action='deletefromcart.php'>"
                         ."<input type='hidden' name='productid' value='".$item["item"]."'>"
                         ."<button class='delete-button' type='submit' title='delete'>delete</button>"
                         ."</form>"
                         ."</td></tr>");
-                    $total=$total+($item["qty"]*$row["price"]);
+                    $total = $total + ($item["qty"] * $row["price"]);
                 }
     }
 }

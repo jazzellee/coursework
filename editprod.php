@@ -44,17 +44,17 @@ if (isset($_POST['productid'])) {
             header('Location: editproduct.php?productid=' . $_POST["productid"]);
             exit();
         } else {
-            echo "No fields to update.";
+            echo("No fields to update.");
         }
 
     } catch (PDOException $e) { 
         error_log("Database error: " . $e->getMessage());
-        echo "An error occurred. Please try again later.";
+        echo("An error occurred. Please try again later.");
     }
 
 } else {
-    echo "No productid provided.";
-    echo '<br><br> <a href="adminproducts.php">Back to Products</a>';
+    echo("No productid provided.");
+    echo('<br><br> <a href="adminproducts.php">Back to Products</a>');
 }
 
 $conn = null;

@@ -25,8 +25,8 @@ include_once("navbar.php");
 
 <?php
 include_once("navbar.php");
-echo '<a href="adminproducts.php">All Products</a><br><br>';
-echo '<a href="adminorders.php">All Orders</a>';
+echo('<a href="adminproducts.php">All Products</a><br><br>');
+echo('<a href="adminorders.php">All Orders</a>');
 ?>
 
 

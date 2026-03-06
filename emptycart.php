@@ -15,7 +15,7 @@ foreach ($_SESSION['item'] as $entry) {
     
     } catch (PDOException $e) { 
         error_log("Database error: " . $e->getMessage());
-        echo "An error occurred. Please try again later.";
+        echo("An error occurred. Please try again later.");
     }
 }
 

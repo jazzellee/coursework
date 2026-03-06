@@ -101,13 +101,13 @@ if (isset($_SESSION["item"])){
         
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
             {
-                $total=$total+($item["qty"]);
+                $total = $total+($item["qty"]);
             }
         }
     
-    echo '<a href="viewcart.php">Cart: '.$total.'</a>';
+    echo('<a href="viewcart.php">Cart: '.$total.'</a>');
 } else {
-    echo '<a href="viewcart.php">Cart: 0</a>';
+    echo('<a href="viewcart.php">Cart: 0</a>');
 }
 echo ('</div>');
 
