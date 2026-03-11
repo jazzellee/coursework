@@ -25,6 +25,7 @@ include_once("adminverify.php");
         <th>Dimensions</th>
         <th>Size</th>
         <th style="visibility:hidden;">Edit</th>
+        </tr>
 
     <?php
     $stmt = $conn->prepare("SELECT * FROM tblproducts");
@@ -37,7 +38,7 @@ include_once("adminverify.php");
                 $row["type"] = "Clothing";
             }
 
-            echo("<tr class='product-row'><td>".$row["productname"]."</td><td>".$row["type"]."</td><td> £".number_format($row["price"],2)."</td><td>"
+            echo("<tr class='product-row'><td>".$row["productname"]."</td><td>".$row["type"]."</td><td> £".number_format($row["price"],2)."</td>"
                 /* stock and update stock */
                 ."<td>"
                 ."<form method='post' action='updatestock.php'>"

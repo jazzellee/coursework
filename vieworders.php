@@ -2,24 +2,6 @@
 session_start();
 include_once("connection.php");
 include_once("loginredirect.php");
-
-function getOrderStatusLabel($status)
-{
-    switch ((int)$status) {
-        case 0:
-            return "Processing";
-        case 1:
-            return "Dispatched";
-        case 2:
-            return "Out for Delivery";
-        case 3:
-            return "Delivered";
-        case 4:
-            return "Cancelled";
-        default:
-            return "Unknown";
-    }
-}
 ?>
 
 <!DOCTYPE html>
@@ -37,9 +19,8 @@ $stmt->execute();
 
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
 $forename = $row["forename"];
-$stmt->closeCursor();
 
-echo("<h1>" . htmlspecialchars($forename) . "'s Orders</h1>");
+echo("<h1>" . $forename . "'s Orders</h1>");
 ?>
 
     <table>
@@ -52,61 +33,71 @@ echo("<h1>" . htmlspecialchars($forename) . "'s Orders</h1>");
         </tr>
 
     <?php
-    $stmt = $conn->prepare("SELECT orderid, date, status FROM tblorders WHERE userid = ? ORDER BY date DESC");
+    $stmt = $conn->prepare("SELECT * FROM tblorders WHERE userid = ?");
     $stmt->bindParam(1, $_SESSION['userid'], PDO::PARAM_INT);
     $stmt->execute();
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
+        {
+            $orderid = $row["orderid"];
+            $date = $row["date"];
+            
+            if ($row["status"] == 0) {
+                $status = "Processing";
 
-    $hasorders = FALSE;
+            } else if ($row["status"] == 1) {
+                $status = "Dispatched";
 
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        $hasorders = TRUE;
+            } else if ($row["status"] == 2) {
+                $status = "Out for Delivery";
 
-        $orderid = $row["orderid"];
-        $date = $row["date"];
-        $status = getOrderStatusLabel($row["status"]);
-        $items = [];
-        $total = 0;
+            } else if ($row["status"] == 3) {
+                $status = "Delivered";
 
-        $stmt2 = $conn->prepare("SELECT productid, quantity FROM tblcart WHERE orderid = ? ORDER BY cartid ASC");
+            } else if ($row["status"] == 4) {
+                $status = "Cancelled";
+            }
+
+        $stmt2 = $conn->prepare("SELECT * FROM tblcart WHERE orderid = ?");
         $stmt2->bindParam(1, $orderid, PDO::PARAM_INT);
         $stmt2->execute();
 
-        while ($row2 = $stmt2->fetch(PDO::FETCH_ASSOC)) {
-            $productid = $row2["productid"];
-            $qty = $row2["quantity"];
+        $total = 0;
+        $totalprice = 0;
+        while ($row2 = $stmt2->fetch(PDO::FETCH_ASSOC))
+            {
+                $productid = $row2["productid"];
+                $qty = $row2["quantity"];
+                $total += $qty;
 
-            $stmt3 = $conn->prepare("SELECT productname, price FROM tblproducts WHERE productid = ?");
-            $stmt3->bindParam(1, $productid, PDO::PARAM_INT);
-            $stmt3->execute();
+                $stmt3 = $conn->prepare("SELECT * FROM tblproducts WHERE productid = ?");
+                $stmt3->bindParam(1, $productid, PDO::PARAM_INT);
+                $stmt3->execute();
 
-            while ($row3 = $stmt3->fetch(PDO::FETCH_ASSOC)) {
-                $productname = $row3["productname"];
-                $price = $row3["price"];
-
-                $items[] = $productname . " x " . $qty;
-                $total += ($price * $qty);
+                while ($row3 = $stmt3->fetch(PDO::FETCH_ASSOC))
+                    {
+                        $price = $row3["price"];
+                        $totalprice += ($price * $qty);
+                    }
             }
+            echo("<tr class='product-row'><td>".$orderid
+                ."<form method='post' action='orderdetails.php'>"
+                ."<input type='hidden' name='orderid' value='".$orderid."'>"
+                ."<input type='hidden' name='status' value='".$status."'>"
+                ."<input type='hidden' name='total' value='".$total."'>"
+                ."<input type='hidden' name='date' value='".$date."'>"
+                ."<input type='hidden' name='totalprice' value='".$totalprice."'>"
+                ."<button class='hover-button' type='submit' title='Details'>View Details</button>"
+                ."</form>"
+                ."</td>"
+                ."<td>".$total." items</td>"
+                ."<td>".$date."</td>"
+                ."<td>£".number_format($totalprice,2)."</td>"
+                ."<td>".$status."</td></tr>");
+        }   
+            
 
-            $stmt3->closeCursor();
-        }
-        $stmt2->closeCursor();
 
-        $itemText = empty($items) ? "-" : implode(", ", $items);
-
-        echo("<tr>");
-        echo("<td>" . $orderid . "</td>");
-        echo("<td>" . htmlspecialchars($itemText) . "</td>");
-        echo("<td>" . $date . "</td>");
-        echo("<td>£" . number_format($total, 2) . "</td>");
-        echo("<td>" . $status . "</td>");
-        echo("</tr>");
-    }
-
-    $stmt->closeCursor();
-
-    if (!$hasorders) {
-        echo('<tr><td colspan="5">No orders found.</td></tr>');
-    }
+    $stmt->closeCursor(); 
     ?>
     </table>
 </body>
