@@ -1,9 +1,8 @@
 <?php
 session_start();
 include_once("connection.php");
-include_once("loginredirect.php");
-include_once("displayuserdetails.php");
 include_once("adminverify.php");
+include_once("displayuserdetails.php");
 ?>
 
 <!DOCTYPE html>
@@ -34,6 +33,7 @@ include_once("adminverify.php");
         {
             if ($row["type"] == 0) {
                 $row["type"] = "Artwork";
+                
             } else if ($row["type"] == 1) {
                 $row["type"] = "Clothing";
             }
