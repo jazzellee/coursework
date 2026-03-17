@@ -16,12 +16,16 @@ if ($row) {
     if (password_verify($attempt, $hashed)) {
         $_SESSION['userid'] = $row["userid"];
 
-        if($row["role"] == 1){
-           header('Location: admin.php');
-        } else {
-            $backURL = isset($_SESSION['backURL']) ? $_SESSION['backURL'] : "homepage.php"; // sets a default destination if no backURL set
+        if (isset($_SESSION['backURL'])) { /* backurl if there is prev. page */
+            $backURL = $_SESSION['backURL'];
             unset($_SESSION['backURL']);
             header('Location: ' . $backURL);
+
+        } elseif($row["role"] == 1) { /* admin homepage if no backurl */
+            header('Location: adminhome.php');
+
+        } else { /* user homepage if no backurl */
+            header('Location: homepage.php');
         }
         
         exit();

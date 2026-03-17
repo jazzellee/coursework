@@ -19,10 +19,30 @@ if (isset($_POST["orderid"], $_POST["date"], $_POST["status"], $_POST["total"], 
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <?php
 
+    if ($_POST["status"] == 0) {
+        $status = "Processing";
+
+    } else if ($_POST["status"] == 1) {
+        $status = "Dispatched";
+
+    } else if ($_POST["status"] == 2) {
+        $status = "Out for Delivery";
+
+    } else if ($_POST["status"] == 3) {
+        $status = "Delivered";
+
+    } else if ($_POST["status"] == 4) {
+        $status = "Cancelled";
+    }
+
+    ?>
+
+    
     <h3>Order #<?php echo($_POST["orderid"]); ?></h3>
     <p>Order Placed: <?php echo($_POST["date"]); ?></p>
-    <p>Status: <?php echo($_POST["status"]); ?></p>
+    <p>Status: <?php echo($status); ?></p>
 
     <table>
         <tr>

@@ -73,6 +73,7 @@ include_once("displayuserdetails.php");
                 ."<td>£".number_format($totalprice,2)."</td>"
                 ."<td>"
                 ."<form method='post' action='changestatus.php'>"
+                ."<input type='hidden' name='orderid' value='".$orderid."'>"
                 ."<select name='status'>"
                 ."<option value=''></option>"
                 ."<option value= 0 " . (($status === 0) ? "selected" : "") . ">Processing</option>"
@@ -93,5 +94,3 @@ include_once("displayuserdetails.php");
     </table>
 </body>
 </html>
-
-

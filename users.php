@@ -34,11 +34,7 @@
     Email Address:<input type="text" name="email" required><br>
     Password:<input type="password" name="password" required minlength="8" maxlength="20"><br>
     Date of Birth:<input type="date" name="dob" required><br>
-    <br>
-    <!--role radio button-->
-    <input type="radio" name="role" value="User" checked> User<br>
-    <input type="radio" name="role" value="Admin"> Admin<br>
-    <input type="submit" value="Add User">
+    <input type="submit" value="Sign Up">
     </form>
 
     <div class="signup-link">
