@@ -2,7 +2,6 @@
 session_start();
 include_once("connection.php");
 include_once("adminverify.php");
-include_once("displayuserdetails.php");
 ?>
 
 <!DOCTYPE html>
@@ -12,6 +11,10 @@ include_once("displayuserdetails.php");
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
+<?php
+include_once("navbar.php");
+?>
 
     <h1>All Orders</h1>
     <table>

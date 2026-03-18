@@ -2,7 +2,6 @@
 session_start();
 include_once("loginredirect.php");
 include_once("adminverify.php");
-include_once("displayuserdetails.php");
 
 
 if (isset($_REQUEST["productid"])) {
@@ -39,6 +38,11 @@ if (isset($_REQUEST["productid"])) {
     
 </head>
 <body>
+
+<?php
+include_once("navbar.php");
+?>
+
     <h3><?php echo($productname); ?></h3>
     <p>Product ID: <?php echo($productid); ?></p>
 

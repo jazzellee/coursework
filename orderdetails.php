@@ -19,6 +19,11 @@ if (isset($_POST["orderid"], $_POST["date"], $_POST["status"], $_POST["total"], 
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
+<?php
+include_once("navbar.php");
+?>
+
     <?php
 
     $status = "Unknown";

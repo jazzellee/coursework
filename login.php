@@ -1,5 +1,6 @@
 <?php
     session_start();
+    include_once("connection.php");
 ?>
 
 <!DOCTYPE html>
@@ -28,6 +29,10 @@
    </style>
 </head>
 <body>
+
+<?php
+include_once("navbar.php");
+?>
 
 <form action="loginprocess.php" method= "POST">
  Email:<input type="text" name="email" required><br>

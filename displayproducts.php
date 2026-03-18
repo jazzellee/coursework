@@ -6,13 +6,13 @@
 <?php
 include_once('connection.php');
 session_start();
+include_once("navbar.php");
 
 if (!isset($_SESSION['userid'])) //reminder to log in in order to add items to cart
 {   
 	$_SESSION['backURL'] = $_SERVER['REQUEST_URI'];
     echo('<a href="login.php">Log in to add items to your cart</a><br><br>');
 } else {
-	include_once("displayuserdetails.php");
 	echo('<a href="viewcart.php">View Cart</a><br><br>');
 }
 

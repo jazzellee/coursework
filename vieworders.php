@@ -13,6 +13,10 @@ include_once("loginredirect.php");
 <body>
 
 <?php
+include_once("navbar.php");
+?>
+
+<?php
 $stmt = $conn->prepare("SELECT forename FROM tblusers WHERE userid = ?");
 $stmt->bindParam(1, $_SESSION['userid'], PDO::PARAM_INT);
 $stmt->execute();

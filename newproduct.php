@@ -2,7 +2,6 @@
 session_start();
 include_once("loginredirect.php");
 include_once("adminverify.php");
-include_once("displayuserdetails.php");
 ?>
 
 
@@ -13,6 +12,11 @@ include_once("displayuserdetails.php");
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
+<?php
+include_once("navbar.php");
+?>
+
     <form action="addproducts.php" method="POST" enctype="multipart/form-data"> <!-- enctype to make files work -->
 
     <label for="type">Product Type:</label>

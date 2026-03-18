@@ -1,5 +1,6 @@
 <?php
     session_start();
+    include_once("connection.php");
 ?>
 
 <!DOCTYPE html>
@@ -28,6 +29,11 @@
    </style>
 </head>
 <body>
+
+<?php
+include_once("navbar.php");
+?>
+
     <form action="addusers.php" method="POST">
     First name:<input type="text" name="forename" required><br>
     Last name:<input type="text" name="surname" required><br>

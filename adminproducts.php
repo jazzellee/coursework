@@ -2,7 +2,6 @@
 session_start();
 include_once("connection.php");
 include_once("adminverify.php");
-include_once("displayuserdetails.php");
 ?>
 
 <!DOCTYPE html>
@@ -12,6 +11,10 @@ include_once("displayuserdetails.php");
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
+<?php
+include_once("navbar.php");
+?>
 
     <h1>Product Details (Admin):</h1>
     <table>
@@ -37,7 +40,7 @@ include_once("displayuserdetails.php");
             } else if ($row["type"] == 1) {
                 $row["type"] = "Clothing";
             }
-
+\
             echo("<tr class='product-row'><td><img src='images/".$row["image"]."'>".$row["productname"]."</td><td>".$row["type"]."</td><td> £".number_format($row["price"],2)."</td>"
                 /* stock and update stock */
                 ."<td>"
