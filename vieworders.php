@@ -40,27 +40,31 @@ echo("<h1>" . $forename . "'s Orders</h1>");
         {
             $orderid = $row["orderid"];
             $date = $row["date"];
+            /* convert to display status */
             
             if ($row["status"] == 0) {
-                $status = "Processing";
+                $statusstr = "Processing";
 
             } else if ($row["status"] == 1) {
-                $status = "Dispatched";
+                $statusstr = "Dispatched";
 
             } else if ($row["status"] == 2) {
-                $status = "Out for Delivery";
+                $statusstr = "Out for Delivery";
 
             } else if ($row["status"] == 3) {
-                $status = "Delivered";
+                $statusstr = "Delivered";
 
             } else if ($row["status"] == 4) {
-                $status = "Cancelled";
+                $statusstr = "Cancelled";
             }
+        
+            $status= $row["status"];
 
         $stmt2 = $conn->prepare("SELECT * FROM tblcart WHERE orderid = ?");
         $stmt2->bindParam(1, $orderid, PDO::PARAM_INT);
         $stmt2->execute();
 
+        /* calculates total items and total price */
         $total = 0;
         $totalprice = 0;
         while ($row2 = $stmt2->fetch(PDO::FETCH_ASSOC))
@@ -79,6 +83,7 @@ echo("<h1>" . $forename . "'s Orders</h1>");
                         $totalprice += ($price * $qty);
                     }
             }
+            /* hidden post for order details that have alr been fetched */
             echo("<tr class='product-row'><td>".$orderid
                 ."<form method='post' action='orderdetails.php'>"
                 ."<input type='hidden' name='orderid' value='".$orderid."'>"
@@ -92,7 +97,7 @@ echo("<h1>" . $forename . "'s Orders</h1>");
                 ."<td>".$total." items</td>"
                 ."<td>".$date."</td>"
                 ."<td>£".number_format($totalprice,2)."</td>"
-                ."<td>".$status."</td></tr>");
+                ."<td>".$statusstr."</td></tr>");
         }   
             
 

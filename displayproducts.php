@@ -30,22 +30,21 @@ if (!isset($_SESSION['userid'])) //reminder to log in in order to add items to c
 	while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
 		{ //uses a hidden input which contains the ID of the product selected
 			echo('<form action="addtocart.php" method="post">');
+			echo('<img src="images/'.$row["image"].'" style="max-width: 200px; max-height: 200px; width: auto; height: auto;"><br>');
+			echo($row["productname"].' £'.$row["price"]."<br>");
 
 			if ($row["stock"] <= 0) {
-				echo($row["productname"].' £'.$row["price"]."<br>");
 				echo('<span style="color: red;">Out of Stock</span><br>');
 
 			} elseif ($row["stock"] <= 5) { 
 				$available = $row["stock"];
-				echo($row["productname"].' £'.$row["price"]."<br>");
 				echo('Only '. $available.' left!'. "<br>
 				<input type='number' name='qty' min='1' max='$available' value='1'>
 				<input type='hidden' name='productid' value=".$row['productid']."'>");
 
 			} else {
-				echo($row["productname"].' £'.$row["price"]."<br>
-				<input type='number' name='qty' min='1' max='5' value='1'>
-				<input type='hidden' name='productid' value=".$row['productid']."'>");
+				echo("<input type='number' name='qty' min='1' max='5' value='1'>
+				<input type='hidden' name='productid' value=".$row['productid'].">");
 			}
 			
 			if (!isset($_SESSION['userid']) and $row["stock"] > 0) {

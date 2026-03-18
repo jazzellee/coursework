@@ -21,6 +21,10 @@ if (isset($_POST["orderid"], $_POST["date"], $_POST["status"], $_POST["total"], 
 <body>
     <?php
 
+    $status = "Unknown";
+
+    /* convert to display status */
+
     if ($_POST["status"] == 0) {
         $status = "Processing";
 
@@ -39,7 +43,7 @@ if (isset($_POST["orderid"], $_POST["date"], $_POST["status"], $_POST["total"], 
 
     ?>
 
-    
+
     <h3>Order #<?php echo($_POST["orderid"]); ?></h3>
     <p>Order Placed: <?php echo($_POST["date"]); ?></p>
     <p>Status: <?php echo($status); ?></p>
@@ -53,6 +57,7 @@ if (isset($_POST["orderid"], $_POST["date"], $_POST["status"], $_POST["total"], 
         </tr>
 
     <?php
+    /* gets products and quantity then calculates price */
     $stmt = $conn->prepare("SELECT productid, quantity FROM tblcart WHERE orderid = ?");
     $stmt->bindParam(1, $_POST['orderid'], PDO::PARAM_INT);
     $stmt->execute();
@@ -81,7 +86,7 @@ if (isset($_POST["orderid"], $_POST["date"], $_POST["status"], $_POST["total"], 
                     }
 
 
-                    echo("<tr class='product-row'><td>".$productname."</td>"
+                    echo("<tr class='product-row'><td><img src='images/".$row2["image"]."'> ".$productname."</td>"
                     ."<td>".$measurements."</td>"
                     ."<td>".$qty."</td>"
                     ."<td>£".number_format($price * $qty,2)."</td></tr>");
@@ -89,6 +94,7 @@ if (isset($_POST["orderid"], $_POST["date"], $_POST["status"], $_POST["total"], 
                 }
         }
 
+        /* final totals row for order */
         echo("<tr><td></td>"
             ."<td></td>"
             ."<td>Total: ".$_POST['total']."</td>"

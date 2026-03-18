@@ -36,6 +36,27 @@ if (isset($_POST['productid'])) {
             $params[':type'] = $type;
         }
 
+        if (isset($_FILES["image"])  && !empty($_FILES["image"]["name"])) {
+            $target_dir = "images/";
+            $target_file = $target_dir . basename($_FILES["image"]["name"]);
+            $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+
+            if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+                $update[] = "image = :image";
+                $params[':image'] = $_FILES["image"]["name"];
+
+                if (!empty($_POST["current_image"]) && $_POST["current_image"] !== $_FILES["image"]["name"]) {
+                    $old_image = $target_dir . basename($_POST["current_image"]);
+                    if (file_exists($old_image)) {
+                        unlink($old_image);
+                    }
+                }
+            } else {
+                echo("Image upload failed.");
+                exit();
+            }
+        }
+
         if (!empty($update)) {
             $sql = "UPDATE tblproducts SET " . implode(", ", $update) . " WHERE productid = :productid";
             $stmt = $conn->prepare($sql);

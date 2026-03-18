@@ -3,7 +3,7 @@ session_start();
 include_once("connection.php");
 
 if (
-    isset($_POST["type"], $_POST["productname"], $_POST["stock"], $_POST["price"], $_POST["description"], $_POST["dimensions"], $_POST["size"])
+    isset($_POST["type"], $_POST["productname"], $_POST["stock"], $_POST["price"], $_POST["description"], $_POST["dimensions"], $_POST["size"], $_FILES["image"])
 ) {
     array_map("htmlspecialchars", $_POST);
 
@@ -20,8 +20,8 @@ if (
     } 
 
     try {
-        $stmt = $conn->prepare("INSERT INTO tblproducts (productid, productname, type, stock, price, description, dimensions, size)
-            VALUES (NULL, :productname, :type, :stock, :price, :description, :dimensions, :size)");
+        $stmt = $conn->prepare("INSERT INTO tblproducts (productid, productname, type, stock, price, description, dimensions, size, image)
+            VALUES (NULL, :productname, :type, :stock, :price, :description, :dimensions, :size, :image)");
 
         $stmt->bindParam(':productname', $_POST["productname"]);
         $stmt->bindParam(':type', $type);
@@ -30,13 +30,29 @@ if (
         $stmt->bindParam(':description', $_POST["description"]);
         $stmt->bindParam(':dimensions', $_POST["dimensions"]);
         $stmt->bindParam(':size', $_POST["size"]);
+        $stmt->bindParam(':image', $_FILES["image"]["name"]);
+
         $stmt->execute();
+
+        $target_dir = "images/";
+        print_r($_FILES);
+        $target_file = $target_dir . basename($_FILES["image"]["name"]);
+        echo $target_file;
+        $uploadOk = 1;
+        $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+        if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+            header('Location: newproduct.php');
+            exit();
+        } else {
+            echo "Sorry, there was an error uploading your file.";
+        }
+
     
-        header('Location: newproduct.php');
-        exit();
+        
     } catch (PDOException $e) { 
         error_log("Database error: " . $e->getMessage());
         echo("An error occurred. Please try again later.");
+        echo($e->getMessage());
     }
 
 } else {

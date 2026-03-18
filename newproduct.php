@@ -13,18 +13,21 @@ include_once("displayuserdetails.php");
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <form action="addproducts.php" method="POST">
+    <form action="addproducts.php" method="POST" enctype="multipart/form-data"> <!-- enctype to make files work -->
+
     <label for="type">Product Type:</label>
     <select name="type">
         <option value="Artwork">Artwork</option>
         <option value="Clothing">Clothing</option>
     </select><br>
     <br>
+    
     Product Name:<input type="text" name="productname" required><br>
     Stock:<input type="number" name="stock" min="0" max="999999" required><br>
     Price: £<input type="number" name="price" min="0.00" max="99999999.99" step="0.01" required><br>
     Description:<input type="text" name="description" required value=""><br>
     Dimensions:<input type="text" name="dimensions"><br>
+
     <label for="size">Size:</label>
     <select name="size">
         <option value=""></option>
@@ -32,6 +35,8 @@ include_once("displayuserdetails.php");
         <option value="M">M</option>
         <option value="L">L</option>
     </select><br>
+    <label for="image">Product Image:</label>
+    <input type="file" name="image" accept="image/*" required><br>
     <input type="submit" value="Add Product">
     </form>
 
@@ -55,10 +60,12 @@ include_once("displayuserdetails.php");
         {
             if ($row["type"] == 0) {
                 $row["type"] = "Artwork";
+
             } else if ($row["type"] == 1) {
                 $row["type"] = "Clothing";
             }
-            echo("<tr><td>".$row["productname"]."</td><td>".$row["type"]."</td><td>£".number_format($row["price"],2)."</td><td>".$row["stock"]."</td><td>".$row["description"]."</td><td>".$row["dimensions"]."</td><td>".$row["size"]."</td></tr>");
+            
+            echo("<tr><td><img src='images/".$row["image"]."'><br>".$row["productname"]."</td><td>".$row["type"]."</td><td>£".number_format($row["price"],2)."</td><td>".$row["stock"]."</td><td>".$row["description"]."</td><td>".$row["dimensions"]."</td><td>".$row["size"]."</td></tr>");
         }
     $stmt->closeCursor();
     ?>

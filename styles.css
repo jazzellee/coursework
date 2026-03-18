@@ -11,6 +11,15 @@ th, td {
     border: 1px solid #ddd;
 }
 
+table td img {
+    max-width: 100%;
+    max-height: 140px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+}
+
 th {
     text-align: left;
 }

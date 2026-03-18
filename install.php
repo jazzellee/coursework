@@ -69,7 +69,8 @@ stock INT(6) NOT NULL,
 price DECIMAL(10,2) NOT NULL,
 description VARCHAR(2047) NOT NULL,
 dimensions VARCHAR(255),
-size VARCHAR(255))"
+size VARCHAR(255),
+image VARCHAR(255) NOT NULL)"
 );
 $stmt->execute();
 $stmt->closeCursor();
@@ -96,14 +97,3 @@ catch(PDOException $e)
 $conn = Null;
 ?>
 
-
-<!-- /* 
-//creates tbltype
-$stmt = $conn->prepare("DROP TABLE IF EXISTS tbltype;
-CREATE TABLE tbltype 
-(typeid INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-typename VARCHAR(255) NOT NULL)"
-);
-$stmt->execute();
-$stmt->closeCursor();
-echo("tbltype created");*/ -->

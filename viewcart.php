@@ -9,13 +9,7 @@ include_once("loginredirect.php");
 <html>
 <head>
     <title>Cart</title>
-    <style>
-        /* hover for delete button */
-        .cart-row { position: relative; }
-        .delete { position: relative; left: 10px; }
-        .delete-button { display: none; }
-        .cart-row:hover .delete-button { display: inline-block; }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <h1>Cart Items:</h1>
@@ -24,7 +18,6 @@ include_once("loginredirect.php");
         <th>Name</th>
         <th>Qty</th>
         <th>Price</th>
-        <th style="visibility:hidden;">Delete</th>
 
     <?php
     $total = 0;
@@ -47,13 +40,12 @@ include_once("loginredirect.php");
             
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
                 {
-                    echo("<tr class='cart-row'><td>".$row["productname"]."</td><td> ".$item["qty"]." </td><td> £".number_format(($item["qty"] * $row["price"]),2)."</td>"
-                        ."<td>"
-                        ."<form class='delete' method='post' action='deletefromcart.php'>"
+                    echo("<tr class='product-row'><td><img src='images/".$row["image"]."'> ".$row["productname"]."</td><td> ".$item["qty"]." "
+                        ."<form class='hover' method='post' action='deletefromcart.php' style='display:inline;'>"
                         ."<input type='hidden' name='productid' value='".$item["item"]."'>"
-                        ."<button class='delete-button' type='submit' title='delete'>delete</button>"
+                        ."<button class='hover-button' type='submit' title='delete'>delete</button>"
                         ."</form>"
-                        ."</td></tr>");
+                        ."</td><td> £".number_format(($item["qty"] * $row["price"]),2)."</td></tr>");
                     $total = $total + ($item["qty"] * $row["price"]);
                 }
     }

@@ -38,7 +38,7 @@ include_once("displayuserdetails.php");
                 $row["type"] = "Clothing";
             }
 
-            echo("<tr class='product-row'><td>".$row["productname"]."</td><td>".$row["type"]."</td><td> £".number_format($row["price"],2)."</td>"
+            echo("<tr class='product-row'><td><img src='images/".$row["image"]."'>".$row["productname"]."</td><td>".$row["type"]."</td><td> £".number_format($row["price"],2)."</td>"
                 /* stock and update stock */
                 ."<td>"
                 ."<form method='post' action='updatestock.php'>"

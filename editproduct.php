@@ -21,6 +21,7 @@ if (isset($_REQUEST["productid"])) {
             $dimensions = $row["dimensions"];
             $size = $row["size"];
             $productname = $row["productname"];
+            $image = $row["image"];
         }
 } else {
     header("Location: adminproducts.php");
@@ -42,7 +43,7 @@ if (isset($_REQUEST["productid"])) {
     <p>Product ID: <?php echo($productid); ?></p>
 
     <!-- Form with pre-filled values for editing product details -->
-    <form action="editprod.php" method="POST">
+    <form action="editprod.php" method="POST" enctype="multipart/form-data">
 
     <label for="type">Product Type:</label>
     <select name="type">
@@ -51,11 +52,17 @@ if (isset($_REQUEST["productid"])) {
         <option value="Clothing" <?php echo ($type === 1) ? "selected" : ""; ?>>Clothing</option>
     </select><br>
     <br>
+
+    <img src='images/<?php echo ($image); ?>' style="max-width: 200px; max-height: 200px; width: auto; height: auto;"><br>
+    Current image: <?php echo ($image); ?><br>
+    <input type="file" name="image" accept="image/*"><br><br>
+
     Product Name:<input type="text" name="productname" value="<?php echo ($productname); ?>"><br>
     Stock:<input type="number" name="stock" min="0" max="999999" step="1" value="<?php echo ($stock); ?>"><br>
     Price: £<input type="number" name="price" min="0.00" max="99999999.99" step="0.01" value="<?php echo ($price); ?>"><br>
     Description:<input type="text" name="description" value="<?php echo ($description); ?>"><br>
     Dimensions:<input type="text" name="dimensions" value="<?php echo ($dimensions); ?>"><br>
+    
     <label for="size">Size:</label>
     <select name="size">
         <option value=""></option>
@@ -64,6 +71,7 @@ if (isset($_REQUEST["productid"])) {
         <option value="L" <?php echo ($size === "L") ? "selected" : ""; ?>>L</option>
     </select><br>
     <input type='hidden' name='productid' value="<?php echo ($productid); ?>">
+    <input type='hidden' name='current_image' value="<?php echo ($image); ?>">
     <button type='submit' title='Confirm'>Confirm</button>
     </form>
 
