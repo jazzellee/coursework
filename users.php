@@ -8,6 +8,7 @@
 <head>
     
     <title>Users</title>
+    <link rel="stylesheet" href="styles.css">
    <style>
         .signup-link {
             margin-top: 25px;

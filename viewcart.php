@@ -26,7 +26,9 @@ include_once("navbar.php");
 
     if (count($_SESSION["item"]) == 0) {
         echo("Your cart is empty");
-        echo("<a href='displayproducts.php'><br>Fill up your cart!</a>");
+        echo("<br><form method='get' action='displayproducts.php' style='display:inline;'>");
+        echo("<button type='submit'>Fill up your cart</button>");
+        echo("</form>");
     } else {
     ?>
     <table>
@@ -45,7 +47,7 @@ include_once("navbar.php");
                 echo("<tr class='product-row'><td><a href='productdetails.php?productid=".$row["productid"]."'><img src='images/".$row["image"]."'></a> <a href='productdetails.php?productid=".$row["productid"]."'>".$row["productname"]."</a></td><td> ".$item["qty"]." "
                     ."<form class='hover' method='post' action='deletefromcart.php' style='display:inline;'>"
                     ."<input type='hidden' name='productid' value='".$item["item"]."'>"
-                    ."<button class='hover-button' type='submit' title='delete'>delete</button>"
+                    ."<button class='hover-button' type='submit' title='delete'>Delete</button>"
                     ."</form>"
                     ."</td><td> £".number_format(($item["qty"] * $row["price"]),2)."</td></tr>");
                 $total = $total + ($item["qty"] * $row["price"]);
@@ -55,7 +57,9 @@ include_once("navbar.php");
         echo("<tr><td></td><td>Total: </td><td>£".number_format($total,2)."</td></tr>");
     ?>
     </table>
-    <a href="checkout.php">Checkout</a>
+    <form method="get" action="checkout.php" style="display:inline-block; margin-top: 14px;">
+        <button type="submit">Checkout</button>
+    </form>
     <?php
     }
     ?>

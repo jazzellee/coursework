@@ -3,10 +3,24 @@
 <head>
     
     <title>User Details</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .user-details {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-details h2 {
+            margin: 0;
+        }
+    </style>
 
 </head>
 <body>
-    <h2>Current User:
+    <div class="user-details">
+    <img src="images/content/user-icon.png" style="width: 20px; height: auto;">
+    <h2>
     <?php
     //displays name of the user that is currently logged in
     if (isset($_SESSION['userid'])) {
@@ -21,10 +35,11 @@
     $stmt->execute();
     while ($row=$stmt->fetch(PDO::FETCH_ASSOC))
         {
-            echo($row["forename"]." ".$row["surname"]."<br>");
+            echo($row["forename"]." ".$row["surname"]);
         }
     ?></h2>
-
+    </div>
+    <br><br>
 
 </body>
 </html>

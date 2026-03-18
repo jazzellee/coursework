@@ -35,6 +35,7 @@ if (isset($_REQUEST["productid"])) {
 <head>
     
     <title>Edit Product</title>
+    <link rel="stylesheet" href="styles.css">
     
 </head>
 <body>
@@ -57,7 +58,7 @@ include_once("navbar.php");
     </select><br>
     <br>
 
-    <img src='images/<?php echo ($image); ?>' style="max-width: 200px; max-height: 200px; width: auto; height: auto;"><br>
+    <img src='images/<?php echo ($image); ?>' class="product-image-rounded" style="max-width: 200px; max-height: 200px; width: auto; height: auto;"><br>
     Current image: <?php echo ($image); ?><br>
     <input type="file" name="image" accept="image/*"><br><br>
 
