@@ -2,11 +2,18 @@
 session_start();
 include_once("connection.php");
 
-if (!isset($_POST['productid'])) {
+$productid = 0;
+
+if (isset($_POST['productid'])) {
+    $productid = (int) $_POST['productid'];
+} elseif (isset($_GET['productid'])) {
+    $productid = (int) $_GET['productid'];
+}
+
+if ($productid <= 0) {
     header('Location: viewcart.php');
     exit();
 }
-$productid = (int) $_POST['productid'];
 
 //redirects back to viewcart if no cart
 if (!isset($_SESSION["item"]) || !is_array($_SESSION["item"])){

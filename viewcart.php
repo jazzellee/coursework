@@ -44,11 +44,10 @@ include_once("navbar.php");
             $stmt->execute();
 
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                echo("<tr class='product-row'><td><a href='productdetails.php?productid=".$row["productid"]."'><img src='images/".$row["image"]."'></a> <a href='productdetails.php?productid=".$row["productid"]."'>".$row["productname"]."</a></td><td> ".$item["qty"]." "
-                    ."<form class='hover' method='post' action='deletefromcart.php' style='display:inline;'>"
-                    ."<input type='hidden' name='productid' value='".$item["item"]."'>"
-                    ."<button class='hover-button' type='submit' title='delete'>Delete</button>"
-                    ."</form>"
+                echo("<tr class='product-row'><td><a href='productdetails.php?productid=".$row["productid"]."'><img src='images/".$row["image"]."'></a> <a href='productdetails.php?productid=".$row["productid"]."'>".$row["productname"]."</a></td><td><span class='cart-qty-wrap'><span class='cart-qty-value'>".$item["qty"]."</span>"
+                    ."<a class='cart-delete-link' href='deletefromcart.php?productid=".$item["item"]."' title='delete'>"
+                    ."<img class='cart-delete-icon' src='images/content/delete-icon.png' alt='Delete' style='width: 24px; height: auto; margin-left:12px;'>"
+                    ."</a>"
                     ."</td><td> £".number_format(($item["qty"] * $row["price"]),2)."</td></tr>");
                 $total = $total + ($item["qty"] * $row["price"]);
             }

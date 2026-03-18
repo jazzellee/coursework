@@ -118,7 +118,8 @@ th, td {
     word-wrap: break-word;
     overflow-wrap: break-word;
     padding: 8px;
-    border: 1px solid #ddd;
+    border: none;
+    border-bottom: 1px solid #ddd;
 }
 
 table td img {
@@ -130,6 +131,34 @@ table td img {
     display: block;
     margin-bottom: 10px;
     border-radius: 8px;
+}
+
+.cart-qty-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.cart-qty-value {
+    line-height: 1;
+}
+
+.cart-delete-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.cart-delete-icon {
+    width: 26px;
+    height: 26px;
+    max-width: none;
+    max-height: none;
+    margin-bottom: 0;
+    border-radius: 0;
+    object-fit: contain;
+    display: block;
 }
 
 .product-image-rounded,
