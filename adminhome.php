@@ -20,12 +20,15 @@ include_once("navbar.php");
 <div id="main-content">
 </div>
 
-
 <h1>Admin Home</h1>
 
 <?php
 include_once("navbar.php");
+echo('<h3>Products: </h3>');
 echo('<a href="adminproducts.php">All Products</a><br><br>');
+echo('<a href="newproduct.php">Add New Product</a><br><br><br><br>');
+
+echo('<h3>Orders: </h3>');
 echo('<a href="adminorders.php">All Orders</a>');
 ?>
 
