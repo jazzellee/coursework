@@ -42,7 +42,7 @@ include_once("navbar.php");
             $stmt->execute();
 
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                echo("<tr class='product-row'><td><img src='images/".$row["image"]."'> ".$row["productname"]."</td><td> ".$item["qty"]." "
+                echo("<tr class='product-row'><td><a href='productdetails.php?productid=".$row["productid"]."'><img src='images/".$row["image"]."'></a> <a href='productdetails.php?productid=".$row["productid"]."'>".$row["productname"]."</a></td><td> ".$item["qty"]." "
                     ."<form class='hover' method='post' action='deletefromcart.php' style='display:inline;'>"
                     ."<input type='hidden' name='productid' value='".$item["item"]."'>"
                     ."<button class='hover-button' type='submit' title='delete'>delete</button>"

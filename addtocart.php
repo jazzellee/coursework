@@ -36,7 +36,12 @@ $stmt->bindParam(':qty', $_POST["qty"]);
 $stmt->execute();
 $stmt->closeCursor();
 
-header('Location: displayproducts.php');
+$backURL = 'displayproducts.php';
+if (isset($_SESSION['backURL']) && !empty($_SESSION['backURL'])) {
+    $backURL = $_SESSION['backURL'];
+}
+
+header("Location: $backURL");
 exit();
 
 ?>

@@ -1,27 +1,23 @@
+<?php
+session_start();
+include_once('connection.php');
+include_once("navbar.php");
+?>
+
 <!DOCTYPE html>
 <html>
 <title>Display Products</title>
 </head>
 <body>
+<h1>Products:</h1>
+
 <?php
-include_once('connection.php');
-session_start();
-include_once("navbar.php");
+
+$_SESSION['backURL'] = $_SERVER['REQUEST_URI'];
 
 if (!isset($_SESSION['userid'])) //reminder to log in in order to add items to cart
 {   
-	$_SESSION['backURL'] = $_SERVER['REQUEST_URI'];
     echo('<a href="login.php">Log in to add items to your cart</a><br><br>');
-} else {
-	echo('<a href="viewcart.php">View Cart</a><br><br>');
-}
-
-	if (isset($_SESSION["item"])) { //displays no. of items in cart
-		$count = 0;
-		foreach ($_SESSION['item'] as $entry) {
-			$count += $entry["qty"];
-	}
-	echo('Items in cart: '.$count);
 }
 
 
@@ -30,8 +26,8 @@ if (!isset($_SESSION['userid'])) //reminder to log in in order to add items to c
 	while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
 		{ //uses a hidden input which contains the ID of the product selected
 			echo('<form action="addtocart.php" method="post">');
-			echo('<img src="images/'.$row["image"].'" style="max-width: 200px; max-height: 200px; width: auto; height: auto;"><br>');
-			echo($row["productname"].' £'.$row["price"]."<br>");
+			echo('<a href="productdetails.php?productid='.$row["productid"].'"><img src="images/'.$row["image"].'" style="max-width: 200px; max-height: 200px; width: auto; height: auto;"></a><br>');
+			echo('<a href="productdetails.php?productid='.$row["productid"].'">'.$row["productname"].' £'.$row["price"].'</a><br>');
 
 			if ($row["stock"] <= 0) {
 				echo('<span style="color: red;">Out of Stock</span><br>');

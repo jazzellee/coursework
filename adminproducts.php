@@ -40,8 +40,8 @@ include_once("navbar.php");
             } else if ($row["type"] == 1) {
                 $row["type"] = "Clothing";
             }
-\
-            echo("<tr class='product-row'><td><img src='images/".$row["image"]."'>".$row["productname"]."</td><td>".$row["type"]."</td><td> £".number_format($row["price"],2)."</td>"
+
+            echo("<tr class='product-row'><td><a href='productdetails.php?productid=".$row["productid"]."'><img src='images/".$row["image"]."'></a><a href='productdetails.php?productid=".$row["productid"]."'>".$row["productname"]."</a></td><td>".$row["type"]."</td><td> £".number_format($row["price"],2)."</td>"
                 /* stock and update stock */
                 ."<td>"
                 ."<form method='post' action='updatestock.php'>"

@@ -45,7 +45,7 @@ include_once("navbar.php");
     </form>
 
     
-    <h2>All Products</h2>
+    <h2><a href="adminproducts.php">All Products</a></h2>
     <table>
         <tr>
             <th>Name</th>
@@ -69,7 +69,7 @@ include_once("navbar.php");
                 $row["type"] = "Clothing";
             }
             
-            echo("<tr><td><img src='images/".$row["image"]."'><br>".$row["productname"]."</td><td>".$row["type"]."</td><td>£".number_format($row["price"],2)."</td><td>".$row["stock"]."</td><td>".$row["description"]."</td><td>".$row["dimensions"]."</td><td>".$row["size"]."</td></tr>");
+            echo("<tr><td><a href='productdetails.php?productid=".$row["productid"]."'><img src='images/".$row["image"]."'></a><br><a href='productdetails.php?productid=".$row["productid"]."'>".$row["productname"]."</a></td><td>".$row["type"]."</td><td>£".number_format($row["price"],2)."</td><td>".$row["stock"]."</td><td>".$row["description"]."</td><td>".$row["dimensions"]."</td><td>".$row["size"]."</td></tr>");
         }
     $stmt->closeCursor();
     ?>
