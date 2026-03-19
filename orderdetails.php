@@ -91,7 +91,7 @@ include_once("navbar.php");
                     }
 
 
-                    echo("<tr class='product-row'><td><a href='productdetails.php?productid=".$productid."'><img src='images/".$row2["image"]."'></a> <a href='productdetails.php?productid=".$productid."'>".$productname."</a></td>"
+                    echo("<tr class='product-row'><td><a class='product-details-image-link' href='productdetails.php?productid=".$productid."'><img src='images/".$row2["image"]."'><span class='product-details-overlay'><span class='product-details-overlay-text'>See Details</span></span></a> <a href='productdetails.php?productid=".$productid."'>".$productname."</a></td>"
                     ."<td>".$measurements."</td>"
                     ."<td>".$qty."</td>"
                     ."<td>£".number_format($price * $qty,2)."</td></tr>");

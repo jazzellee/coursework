@@ -143,6 +143,7 @@ $stmt->closeCursor();
         <!-- add to cart -->
         <form action="addtocart.php" method="post" class="add-to-cart-form">
             <?php
+            $returnURL = $_SERVER['REQUEST_URI'];
             if ($row["stock"] <= 0) {
                 echo('<span style="color: red;">Out of Stock</span><br>');
 
@@ -156,6 +157,7 @@ $stmt->closeCursor();
                 echo('<button type="button" class="qty-step qty-step-plus" aria-label="Increase quantity">+</button>');
                 echo('</div>');
                 echo('<input type="hidden" name="productid" value="'.$row['productid'].'">');
+                echo('<input type="hidden" name="returnurl" value="'.htmlspecialchars($returnURL).'">');
 
             } else {
                 echo('<div class="cart-controls">');
@@ -165,6 +167,7 @@ $stmt->closeCursor();
                 echo('<button type="button" class="qty-step qty-step-plus" aria-label="Increase quantity">+</button>');
                 echo('</div>');
                 echo('<input type="hidden" name="productid" value="'.$row['productid'].'">');
+                echo('<input type="hidden" name="returnurl" value="'.htmlspecialchars($returnURL).'">');
             }
 
             if (!isset($_SESSION['userid']) and $row["stock"] > 0) {

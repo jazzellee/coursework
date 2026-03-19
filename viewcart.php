@@ -9,6 +9,13 @@ include_once("loginredirect.php");
 <head>
     <title>Cart</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .cart-main-content {
+            width: 800px;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+    </style>
 </head>
 <body>
 
@@ -16,6 +23,7 @@ include_once("loginredirect.php");
 include_once("navbar.php");
 ?>
 
+<div class="cart-main-content">
     <h1>Cart Items:</h1>
 
     <?php
@@ -44,7 +52,7 @@ include_once("navbar.php");
             $stmt->execute();
 
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                echo("<tr class='product-row'><td><a href='productdetails.php?productid=".$row["productid"]."'><img src='images/".$row["image"]."'></a> <a href='productdetails.php?productid=".$row["productid"]."'>".$row["productname"]."</a></td><td><span class='cart-qty-wrap'><span class='cart-qty-value'>".$item["qty"]."</span>"
+                echo("<tr class='product-row'><td><a class='product-details-image-link' href='productdetails.php?productid=".$row["productid"]."'><img src='images/".$row["image"]."'><span class='product-details-overlay'><span class='product-details-overlay-text'>See Details</span></span></a> <a href='productdetails.php?productid=".$row["productid"]."'>".$row["productname"]."</a></td><td><span class='cart-qty-wrap'><span class='cart-qty-value'>".$item["qty"]."</span>"
                     ."<a class='cart-delete-link' href='deletefromcart.php?productid=".$item["item"]."' title='delete'>"
                     ."<img class='cart-delete-icon' src='images/content/delete-icon.png' alt='Delete' style='width: 24px; height: auto; margin-left:12px;'>"
                     ."</a>"
@@ -62,5 +70,6 @@ include_once("navbar.php");
     <?php
     }
     ?>
+</div>
 </body>
 </html>

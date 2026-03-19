@@ -52,10 +52,11 @@ if (!isset($_SESSION['userid'])) //reminder to log in in order to add items to c
 	$stmt = $conn->prepare("SELECT * FROM tblproducts");
 	$stmt->execute();
 	echo('<div class="products-grid">');
+	$returnURL = $_SERVER['REQUEST_URI'];
 	while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
 		{ //uses a hidden input which contains the ID of the product selected
 			echo('<form action="addtocart.php" method="post" class="add-to-cart-form product-card">');
-			echo('<a href="productdetails.php?productid='.$row["productid"].'" class="product-card-image-link"><img src="images/'.$row["image"].'" class="product-card-image"></a>');
+			echo('<a href="productdetails.php?productid='.$row["productid"].'" class="product-card-image-link product-details-image-link"><img src="images/'.$row["image"].'" class="product-card-image"><span class="product-details-overlay"><span class="product-details-overlay-text">See Details</span></span></a>');
 			echo('<a href="productdetails.php?productid='.$row["productid"].'" class="product-card-title">'.$row["productname"].' £'.$row["price"].'</a>');
 
 			if ($row["stock"] <= 0) {
@@ -71,6 +72,7 @@ if (!isset($_SESSION['userid'])) //reminder to log in in order to add items to c
 				echo('<button type="button" class="qty-step qty-step-plus" aria-label="Increase quantity">+</button>');
 				echo('</div>');
 				echo('<input type="hidden" name="productid" value="'.$row['productid'].'">');
+				echo('<input type="hidden" name="returnurl" value="'.htmlspecialchars($returnURL).'">');
 
 			} else {
 				echo('<div class="cart-controls">');
@@ -80,6 +82,7 @@ if (!isset($_SESSION['userid'])) //reminder to log in in order to add items to c
 				echo('<button type="button" class="qty-step qty-step-plus" aria-label="Increase quantity">+</button>');
 				echo('</div>');
 				echo('<input type="hidden" name="productid" value="'.$row['productid'].'">');
+				echo('<input type="hidden" name="returnurl" value="'.htmlspecialchars($returnURL).'">');
 			}
 			
 			if (!isset($_SESSION['userid']) and $row["stock"] > 0) {

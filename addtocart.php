@@ -2,6 +2,32 @@
 session_start();
 include_once("connection.php");
 
+function resolveReturnUrl($candidate) {
+    if (!is_string($candidate) || $candidate === "") {
+        return NULL;
+    }
+
+    if (strpos($candidate, "\r") !== FALSE || strpos($candidate, "\n") !== FALSE) {
+        return NULL;
+    }
+
+    $parts = parse_url($candidate);
+    if ($parts === FALSE) {
+        return NULL;
+    }
+
+    if (isset($parts['scheme']) || isset($parts['host'])) {
+        return NULL;
+    }
+
+    $path = $parts['path'] ?? "";
+    if ($path === "" || !preg_match('/^[A-Za-z0-9_\-\.\/]+$/', $path)) {
+        return NULL;
+    }
+
+    return $candidate;
+}
+
 //creates cart if not created
 if (!isset($_SESSION["item"]) || !is_array($_SESSION["item"])) {
     $_SESSION["item"] = array();
@@ -37,8 +63,15 @@ $stmt->execute();
 $stmt->closeCursor();
 
 $backURL = 'displayproducts.php';
-if (isset($_SESSION['backURL']) && !empty($_SESSION['backURL'])) {
-    $backURL = $_SESSION['backURL'];
+
+$postedReturnUrl = resolveReturnUrl($_POST['returnurl'] ?? '');
+if ($postedReturnUrl !== NULL) {
+    $backURL = $postedReturnUrl;
+} else {
+    $sessionReturnUrl = resolveReturnUrl($_SESSION['backURL'] ?? '');
+    if ($sessionReturnUrl !== NULL) {
+        $backURL = $sessionReturnUrl;
+    }
 }
 
 header("Location: $backURL");

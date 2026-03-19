@@ -41,7 +41,7 @@ include_once("navbar.php");
                 $row["type"] = "Clothing";
             }
 
-            echo("<tr class='product-row'><td><a href='productdetails.php?productid=".$row["productid"]."'><img src='images/".$row["image"]."'></a><a href='productdetails.php?productid=".$row["productid"]."'>".$row["productname"]."</a></td><td>".$row["type"]."</td><td> £".number_format($row["price"],2)."</td>"
+            echo("<tr class='product-row'><td><a class='product-details-image-link' href='productdetails.php?productid=".$row["productid"]."'><img src='images/".$row["image"]."'><span class='product-details-overlay'><span class='product-details-overlay-text'>See Details</span></span></a><a href='productdetails.php?productid=".$row["productid"]."'>".$row["productname"]."</a></td><td>".$row["type"]."</td><td> £".number_format($row["price"],2)."</td>"
                 /* stock and update stock */
                 ."<td>"
                 ."<form method='post' action='updatestock.php'>"
