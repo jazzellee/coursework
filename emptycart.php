@@ -8,10 +8,11 @@ foreach ($_SESSION['item'] as $entry) {
         $stmt = $conn->prepare("UPDATE tblproducts SET stock = stock +:qty WHERE productid=:productid");
 
         $stmt->bindParam(':productid', $entry["item"]);
-        $stmt->bindParam(':quantity', $entry["quantity"]);
+        $stmt->bindParam(':qty', $entry["qty"]);
         $stmt->execute();
         $stmt->closeCursor();
 
+        
     
     } catch (PDOException $e) { 
         error_log("Database error: " . $e->getMessage());
@@ -20,5 +21,9 @@ foreach ($_SESSION['item'] as $entry) {
 }
 
 unset($_SESSION["item"]);
+
+header('Location: viewcart.php');
+exit();
+
 
 ?>

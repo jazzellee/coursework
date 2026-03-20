@@ -64,12 +64,20 @@ include_once("navbar.php");
         echo("<tr><td></td><td>Total: </td><td>£".number_format($total,2)."</td></tr>");
     ?>
     </table>
+
+    <!-- checkout button -->
     <form method="get" action="checkout.php" style="display:inline-block; margin-top: 14px;">
         <button type="submit">Checkout</button>
+    </form>
+
+    <!-- empty cart button -->
+    <form method="get" action="emptycart.php" style="display:inline-block; margin-top: 14px; float: right;">
+        <button type="submit">Empty Cart</button>
     </form>
     <?php
     }
     ?>
+
 </div>
 </body>
 </html>
