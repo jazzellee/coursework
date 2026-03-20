@@ -131,7 +131,7 @@ if (isset($_SESSION["item"])){
     
     echo('<a href="viewcart.php"><img src="images/content/cart-icon.png" style="vertical-align: middle;" width="28" height="28"> '.$total.'</a>');
 } else {
-    echo('<a href="viewcart.php">Cart: 0</a>');
+    echo('<a href="viewcart.php"><img src="images/content/cart-icon.png" style="vertical-align: middle;" width="28" height="28"> 0</a>');
 }
 echo ('</div>');
 
