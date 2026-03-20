@@ -4,19 +4,16 @@ include_once("connection.php");
 
  
 if (
-    isset($_POST["forename"], $_POST["surname"], $_POST["email"], $_POST["password"], $_POST["email"], $_POST["role"])
+    isset($_POST["forename"], $_POST["surname"], $_POST["email"], $_POST["password"], $_POST["email"],)
 ) {
     array_map("htmlspecialchars", $_POST);
 
     switch ($_POST["role"]) {
-        case "User":
-            $role = 0;
-            break;
         case "Admin":
             $role = 1;
             break;
         default:
-            $role = null;
+            $role = 0;
     } 
 
     if ($role !== null) {

@@ -45,7 +45,7 @@ $_SESSION['backURL'] = $_SERVER['REQUEST_URI'];
 
 if (!isset($_SESSION['userid'])) //reminder to log in in order to add items to cart
 {   
-    echo('<a href="login.php">Log in to add items to your cart</a><br><br>');
+    echo('<br><br><a href="login.php">Log in to add items to your cart</a><br><br>');
 }
 
 
