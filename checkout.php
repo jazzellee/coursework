@@ -41,7 +41,7 @@ foreach ($_SESSION['item'] as $entry) {
 
 $conn = null;
 unset($_SESSION["item"]);
-header('Location: homepage.php');
+header('Location: vieworders.php');
 exit();
 ?>
 
