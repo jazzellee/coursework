@@ -68,7 +68,7 @@ if (!isset($_SESSION['userid'])) //reminder to log in in order to add items to c
 				echo('<div class="cart-controls">');
 				echo('<div class="qty-selector">');
 				echo('<button type="button" class="qty-step qty-step-minus" aria-label="Decrease quantity">-</button>');
-				echo('<input type="number" name="qty" min="1" max="'.$available.'" value="1" class="qty-input">');
+				echo('<input type="number" name="qty" min="1" max="'.$available.'" value="1" class="qty-input" required>');
 				echo('<button type="button" class="qty-step qty-step-plus" aria-label="Increase quantity">+</button>');
 				echo('</div>');
 				echo('<input type="hidden" name="productid" value="'.$row['productid'].'">');
@@ -78,7 +78,7 @@ if (!isset($_SESSION['userid'])) //reminder to log in in order to add items to c
 				echo('<div class="cart-controls">');
 				echo('<div class="qty-selector">');
 				echo('<button type="button" class="qty-step qty-step-minus" aria-label="Decrease quantity">-</button>');
-				echo('<input type="number" name="qty" min="1" max="5" value="1" class="qty-input">');
+				echo('<input type="number" name="qty" min="1" max="5" value="1" class="qty-input" required>');
 				echo('<button type="button" class="qty-step qty-step-plus" aria-label="Increase quantity">+</button>');
 				echo('</div>');
 				echo('<input type="hidden" name="productid" value="'.$row['productid'].'">');
