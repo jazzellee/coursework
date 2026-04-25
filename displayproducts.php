@@ -59,6 +59,7 @@ if (!isset($_SESSION['userid'])) //reminder to log in in order to add items to c
 			echo('<a href="productdetails.php?productid='.$row["productid"].'" class="product-card-image-link product-details-image-link"><img src="images/'.$row["image"].'" class="product-card-image"><span class="product-details-overlay"><span class="product-details-overlay-text">See Details</span></span></a>');
 			echo('<a href="productdetails.php?productid='.$row["productid"].'" class="product-card-title">'.$row["productname"].' £'.$row["price"].'</a>');
 
+			/* different messages based on stock qty: sold out, < 5, normal*/
 			if ($row["stock"] <= 0) {
 				echo('<span style="color: red;">Out of Stock</span><br>');
 
@@ -103,6 +104,8 @@ if (!isset($_SESSION['userid'])) //reminder to log in in order to add items to c
 	echo('</div>');
 	$stmt->closeCursor();
 ?>
+
+<!-- add / remove buttons and qty selector -->
 <script>
 	document.addEventListener('DOMContentLoaded', function () {
 		document.querySelectorAll('.qty-selector').forEach(function (selector) {

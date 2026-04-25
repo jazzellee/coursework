@@ -17,6 +17,7 @@ if (isset($_POST["productid"])) {
         unlink(__DIR__ . "/images/" . basename($image));
     }
     
+    /* delete sql statement */
     $stmt = $conn->prepare("DELETE FROM tblproducts WHERE productid = :productid");
     $stmt->bindParam(":productid", $_POST["productid"]);
     $stmt->execute();

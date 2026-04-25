@@ -16,6 +16,7 @@ include_once("loginredirect.php");
 include_once("navbar.php");
 ?>
 
+<!-- fetch name of user for display -->
 <?php
 $stmt = $conn->prepare("SELECT forename FROM tblusers WHERE userid = ?");
 $stmt->bindParam(1, $_SESSION['userid'], PDO::PARAM_INT);
@@ -37,6 +38,8 @@ echo("<h1>" . $forename . "'s Orders</h1>");
         </tr>
 
     <?php
+
+    /* nested while loops with sql statements to fetch order details across linked tables */
     $stmt = $conn->prepare("SELECT * FROM tblorders WHERE userid = ?");
     $stmt->bindParam(1, $_SESSION['userid'], PDO::PARAM_INT);
     $stmt->execute();
@@ -44,6 +47,7 @@ echo("<h1>" . $forename . "'s Orders</h1>");
         {
             $orderid = $row["orderid"];
             $date = $row["date"];
+
             /* convert to display status */
             
             if ($row["status"] == 0) {

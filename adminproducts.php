@@ -33,7 +33,7 @@ include_once("navbar.php");
     $stmt = $conn->prepare("SELECT * FROM tblproducts");
     $stmt->execute();
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
-        {
+        { /* switching stored integer into their respective type names before outputting */
             if ($row["type"] == 0) {
                 $row["type"] = "Artwork";
                 
@@ -41,6 +41,8 @@ include_once("navbar.php");
                 $row["type"] = "Clothing";
             }
 
+            /* table display */
+            
             echo("<tr class='product-row'><td><a class='product-details-image-link' href='productdetails.php?productid=".$row["productid"]."'><img src='images/".$row["image"]."'><span class='product-details-overlay'><span class='product-details-overlay-text'>See Details</span></span></a><a href='productdetails.php?productid=".$row["productid"]."'>".$row["productname"]."</a></td><td>".$row["type"]."</td><td> £".number_format($row["price"],2)."</td>"
                 /* stock and update stock */
                 ."<td>"

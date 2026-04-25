@@ -10,6 +10,7 @@ if (!isset($_GET["productid"])) {
 
 array_map("htmlspecialchars", $_GET);
 
+/* sql statment to fetch product details */
 $stmt = $conn->prepare("SELECT * FROM tblproducts WHERE productid = :productid");
 $stmt->bindParam(':productid', $_GET["productid"]);
 $stmt->execute();
@@ -122,13 +123,15 @@ $stmt->closeCursor();
 </head>
 <body>
 
+<!-- product display -->
 <div class="product-layout">
     <div class="product-image-panel">
         <img src="images/<?php echo($row["image"]); ?>" class="product-image-rounded">
     </div>
 
     <div class="product-details-panel">
-
+        
+        <!-- back button -->
         <a href="displayproducts.php" class="pd-back"><img src="images/content/back-arrow.png" alt="Back" style="height: 24px; width: auto;"></a>
         <script>
             document.currentScript.previousElementSibling.addEventListener('click', function(e) {
@@ -140,7 +143,7 @@ $stmt->closeCursor();
         <hr class="pd-divider">
         <p class="pd-price">£<?php echo(number_format($row["price"], 2)); ?></p>
 
-        <!-- add to cart -->
+        <!-- add to cart, out of stock or low stock messages -->
         <form action="addtocart.php" method="post" class="add-to-cart-form">
             <?php
             $returnURL = $_SERVER['REQUEST_URI'];
@@ -210,6 +213,7 @@ $stmt->closeCursor();
     </div>
 </div>
 
+<!-- cart increase decrease qty buttons -->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const qtyInput = document.querySelector('.qty-input');

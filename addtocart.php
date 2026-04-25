@@ -2,6 +2,7 @@
 session_start();
 include_once("connection.php");
 
+/* return url to return to page where user added the product to cart */
 function resolveReturnUrl($candidate) {
     if (!is_string($candidate) || $candidate === "") {
         return NULL;

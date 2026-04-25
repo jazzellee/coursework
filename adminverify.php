@@ -5,6 +5,7 @@ if (isset($_SESSION['userid'])) {
 $userid = $_SESSION['userid'];
 }
 
+/* checks role to see if it is 1 (admin) */
 $stmt = $conn->prepare("SELECT role FROM tblusers WHERE userid=?");
 $stmt->bindParam(1, $userid, PDO::PARAM_INT);
 $stmt->execute();

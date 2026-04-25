@@ -32,6 +32,7 @@ include_once("navbar.php");
         $_SESSION["item"] = array();
     }
 
+    /* message if cart is empty */
     if (count($_SESSION["item"]) == 0) {
         echo("Your cart is empty");
         echo("<br><form method='get' action='displayproducts.php' style='display:inline;'>");
@@ -39,6 +40,8 @@ include_once("navbar.php");
         echo("</form>");
     } else {
     ?>
+
+    <!-- displays cart items in table -->
     <table>
         <tr>
             <th>Name</th>
@@ -51,12 +54,15 @@ include_once("navbar.php");
             $stmt->bindParam(':productid', $item["item"]);
             $stmt->execute();
 
+            /* delete item from cart button */
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 echo("<tr class='product-row'><td><a class='product-details-image-link' href='productdetails.php?productid=".$row["productid"]."'><img src='images/".$row["image"]."'><span class='product-details-overlay'><span class='product-details-overlay-text'>See Details</span></span></a> <a href='productdetails.php?productid=".$row["productid"]."'>".$row["productname"]."</a></td><td><span class='cart-qty-wrap'><span class='cart-qty-value'>".$item["qty"]."</span>"
                     ."<a class='cart-delete-link' href='deletefromcart.php?productid=".$item["item"]."' title='delete'>"
                     ."<img class='cart-delete-icon' src='images/content/delete-icon.png' alt='Delete' style='width: 24px; height: auto; margin-left:12px;'>"
                     ."</a>"
                     ."</td><td> £".number_format(($item["qty"] * $row["price"]),2)."</td></tr>");
+
+                /* total price */
                 $total = $total + ($item["qty"] * $row["price"]);
             }
         }

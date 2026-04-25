@@ -20,6 +20,7 @@ foreach ($_SESSION['item'] as $entry) {
     }
 }
 
+//resets session variable
 unset($_SESSION["item"]);
 
 header('Location: viewcart.php');

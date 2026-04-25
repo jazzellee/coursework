@@ -7,6 +7,7 @@ include_once("adminverify.php");
 if (isset($_REQUEST["productid"])) {
     array_map("htmlspecialchars", $_REQUEST);
     
+    /* sql statement to fetch product info */
     $stmt = $conn->prepare("SELECT * FROM tblproducts WHERE productid = :productid");
     $stmt->bindParam(":productid", $_REQUEST["productid"]);
     $stmt->execute();

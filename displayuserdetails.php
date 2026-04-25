@@ -29,6 +29,8 @@
         echo('<a href="login.php">Log In</a><br><br>');
     }
 
+
+    /* fetch name using session userid */
     include_once("connection.php");
     $stmt = $conn->prepare("SELECT forename, surname FROM tblusers WHERE userid = ?");
     $stmt->bindParam(1, $userid, PDO::PARAM_INT);

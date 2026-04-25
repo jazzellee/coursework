@@ -14,6 +14,7 @@ include_once("adminverify.php");
 <body>
 
 
+<!-- include navbar at the top -->
 <?php
 include_once("navbar.php");
 ?>
@@ -23,6 +24,7 @@ include_once("navbar.php");
 
 <h1>Admin Home</h1>
 
+<!-- links to other pages -->
 <?php
 echo('<h3>Products: </h3>');
 echo('<a href="adminproducts.php">All Products</a><br><br>');

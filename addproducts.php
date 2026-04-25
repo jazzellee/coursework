@@ -7,7 +7,7 @@ if (
 ) {
     array_map("htmlspecialchars", $_POST);
 
-
+    /* switches string input to integer for database storage */
     switch ($_POST["type"]) {
         case "Artwork":
             $type = 0;
@@ -19,6 +19,7 @@ if (
             $type = null;
     } 
 
+    /* SQL statement inserting into tblproducts */
     try {
         $stmt = $conn->prepare("INSERT INTO tblproducts (productid, productname, type, stock, price, description, dimensions, size, image)
             VALUES (NULL, :productname, :type, :stock, :price, :description, :dimensions, :size, :image)");
@@ -34,6 +35,7 @@ if (
 
         $stmt->execute();
 
+        /* handling image upload */
         $target_dir = "images/";
         print_r($_FILES);
         $target_file = $target_dir . basename($_FILES["image"]["name"]);
@@ -46,7 +48,6 @@ if (
         } else {
             echo "Sorry, there was an error uploading your file.";
         }
-
     
         
     } catch (PDOException $e) { 

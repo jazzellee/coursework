@@ -15,7 +15,7 @@ include_once("adminverify.php");
 <?php
 include_once("navbar.php");
 ?>
-
+   <!-- table to dsplay all orders -->
     <h1>All Orders</h1>
     <table>
         <tr>
@@ -27,6 +27,7 @@ include_once("navbar.php");
         <th>Status</th>
         </tr>
 
+    <!-- nested while loops to fetch all order details from linked database tables -->
     <?php
     $stmt = $conn->prepare("SELECT * FROM tblorders");
     $stmt->execute();
@@ -60,6 +61,9 @@ include_once("navbar.php");
                         $totalprice += ($price * $qty);
                     }
             }
+
+            /* outputting table */
+
             echo("<tr class='product-row'><td>".$orderid
                 ."<form method='post' action='orderdetails.php'>"
                 ."<input type='hidden' name='orderid' value='".$orderid."'>"

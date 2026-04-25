@@ -6,6 +6,7 @@ include_once("adminverify.php");
 if (isset($_POST['productid'])) {
     array_map("htmlspecialchars", $_POST);
 
+    /* sql update statement to update stock if field is not left blank */
     if ($_POST['stock'] !== ""){
         $stmt = $conn->prepare("UPDATE tblproducts SET stock = :stock WHERE productid = :productid");
         $stmt->bindParam(":productid", $_POST["productid"]);

@@ -35,7 +35,8 @@ if (isset($_POST['productid'])) {
             $update[] = "type = :type";
             $params[':type'] = $type;
         }
-
+        
+        /* image upload, then finds and deletes the old image file from images folder */
         if (isset($_FILES["image"])  && !empty($_FILES["image"]["name"])) {
             $target_dir = "images/";
             $target_file = $target_dir . basename($_FILES["image"]["name"]);

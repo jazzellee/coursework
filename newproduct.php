@@ -17,6 +17,7 @@ include_once("adminverify.php");
 include_once("navbar.php");
 ?>
 
+    <!-- form to input product details -->
     <form action="addproducts.php" method="POST" enctype="multipart/form-data"> <!-- enctype to make files work -->
 
     <label for="type">Product Type:</label>
@@ -45,6 +46,7 @@ include_once("navbar.php");
     </form>
 
 
+    <!-- shows all existing products and their details in a table -->
     <h2><a href="adminproducts.php">All Products</a></h2>
     <table>
         <tr>

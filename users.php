@@ -34,7 +34,7 @@
 <?php
 include_once("navbar.php");
 ?>
-
+    <!-- form to enter signup / account details -->
     <form action="addusers.php" method="POST">
     First name:<input type="text" name="forename" required><br>
     Last name:<input type="text" name="surname" required><br>

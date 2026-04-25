@@ -8,15 +8,7 @@ if (
 ) {
     array_map("htmlspecialchars", $_POST);
 
-    switch ($_POST["role"]) {
-        case "Admin":
-            $role = 1;
-            break;
-        default:
-            $role = 0;
-    } 
-
-    if ($role !== null) {
+        /* insert into database */
         try {
 			$pw = password_hash($_POST["password"], PASSWORD_BCRYPT); // Password hashing
             $stmt = $conn->prepare("INSERT INTO tblusers (userid, forename, surname, email, password, role)
@@ -37,9 +29,6 @@ if (
             error_log("Database error: " . $e->getMessage());
             echo("An error occurred. Please try again later.");
         }
-    } else {
-        echo("Invalid role provided.");
-    }
 } else {
     echo("Incomplete form submission.");
 }

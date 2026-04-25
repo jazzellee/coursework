@@ -35,12 +35,14 @@
 include_once("navbar.php");
 ?>
 
+<!-- login form -->
 <form action="loginprocess.php" method= "POST">
  Email:<input type="text" name="email" required><br>
  Password:<input type="password" name="passwd" required><br>
   <input type="submit" value="Login">
 </form>
 
+<!-- link to signup page if user does not have an account -->
 <div class="signup-link">
             Don't have an account? <a href="users.php">Sign Up Here</a>
         </div>
